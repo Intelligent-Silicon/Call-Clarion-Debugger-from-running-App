@@ -75,3 +75,5 @@ This is a neccesary work around when permissions prevent the clarion debugger fr
 At this stage I havent narrowed down what the exact cause it.
 
 If permissions is not an issue, then the code above will call the Clarion Debugger automatically for you, so that you can then navigate to the line of code and breakpoint the line after to pick up in the debugger after the messagebox has been OK'ed.
+
+.
