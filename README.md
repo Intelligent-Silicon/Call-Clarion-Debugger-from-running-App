@@ -44,5 +44,5 @@ Once the debugger has loaded, click ```Window```, then click ```Source``` and se
 
 Set a break point on the line of the code, and this action of selecting a line prompts the debugger into loading the remaining debugger window panes, to then enable you to carry out a debugging session, including stepping into Assembler if you fancy rolling your sleeves up a bit more.
 
-Thats all you need to do regardless of Window permissions and or other apps have called your Clarion app, like a Browser calling your Clarion Browser Extension Plugin.
+Thats all you need to do regardless of Window permissions and/or other apps have called your Clarion app, like a Browser calling your Clarion Browser Extension Plugin.
 
