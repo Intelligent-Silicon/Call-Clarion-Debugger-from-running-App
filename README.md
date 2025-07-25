@@ -40,7 +40,7 @@ Non Elevated asInvoker.
 "c:\Clarion11\bin\cladbne.exe" -p 1234
 ```
 
-Once the debugger has loaded, click ```Window```, then click ```Source``` and select the filename.clw for the code you want to debug.
+Once the debugger has loaded, click ```Window```, then click ```Source``` and select the ```filename.clw``` for the code you want to debug.
 
 Set a break point on the line of the code, and this action of selecting a line prompts the debugger into loading the remaining debugger window panes, to then enable you to carry out a debugging session, including stepping into Assembler if you fancy rolling your sleeves up a bit more.
 
