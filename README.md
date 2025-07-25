@@ -5,7 +5,7 @@ Most people are familiar with calling the Clarion Debugger from the IDE, but les
 
 One way to step into a running app to debug it, add the following to the Clarion app.
 
-```
+```clarion
     MAP
 ClarionProc1    Procedure()
 ClarionProc2    Procedure()
