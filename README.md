@@ -22,9 +22,9 @@ ClarionProc1    Procedure()
     Message('Glo:CurrentPID = ' & Glo:CurrentPID)
 ```
 
-This pops up the Process ID, and its easy to add this before the section of code you want to debug.
+This pops up the ProcessID, and its easy to add this before the section of code you want to debug.
 
- Another way to get the ProcessID for the running app is to use [SysInternals procexp64.exe](https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer) but requires you to find a convenient procedure and thus Accept look to break into with the Clarion Debugger statement shown below.
+ Another way to get the ProcessID for the running app is to use [SysInternals procexp64.exe](https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer) but requires you to find a convenient procedure and thus ```Accept``` loop to break into with the Clarion Debugger statement shown below.
 
 Once you have obtained the ProcessID, paste the following into the Run window, or a Dos window, 1234 is replaced by the actual ProcessID.
 
