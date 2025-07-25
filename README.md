@@ -3,7 +3,7 @@
 Most people are familiar with calling the Clarion Debugger from the IDE, but less are familiar with stepping into the Clarion Debugger from a running App.
 
 
-One way to step into a running app to debug it, add the following to the Clarion app.
+One way to step into a running app to debug it, is add the following to the Clarion app.
 
 ```clarion
     MAP
