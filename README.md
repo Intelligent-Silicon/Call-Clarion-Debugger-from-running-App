@@ -34,7 +34,7 @@ Once you have obtained the ProcessID, paste the following into the Run window, o
 
 Once the debugger has loaded, click ```Window```, then click ```Source``` and select the filename.clw for the code you want to debug.
 
-Set a break point on the line of the code, and this action of selecting a line prompts the debugger into loading the remaining window panes, to then enable you to carry out a debugging session.
+Set a break point on the line of the code, and this action of selecting a line prompts the debugger into loading the remaining debugger window panes, to then enable you to carry out a debugging session, including stepping into Assembler if you fancy rolling your sleeves up a bit more.
 
-Thats all you need to do regardless of Window Permissions, what other apps have called your Clarion app.
+Thats all you need to do regardless of Window permissions and what other apps shave called your Clarion app.
 
