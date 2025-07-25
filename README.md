@@ -28,7 +28,7 @@ This pops up the ProcessID in a modal message dialog box, and its easy to add th
 
  Another way to get the ProcessID for the running app is to use [SysInternals procexp64.exe](https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer) but requires you to find a convenient procedure and thus ```Accept``` loop to break into with the Clarion Debugger statement shown below.
 
-Once you have obtained the ProcessID, paste the following into the Run window, or a Dos window, 1234 is replaced by the actual ProcessID.
+Once you have obtained the ProcessID, paste the following into the Run window, a Dos window, or a Powershell window, and replace 1234 with the actual ProcessID.
 
 Elevated to Administrator level
 ```
