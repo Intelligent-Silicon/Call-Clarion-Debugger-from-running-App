@@ -24,7 +24,7 @@ ClarionProc1    Procedure()
     !Run('C:\Clarion11\bin\Cladbne.exe -p ' & Glo:CurrentPID, 0) ! Only use this if you want to be stuck in an infinite loop. Runs asinvoker and Not Elevated.
 ```
 
-This pops up the ProcessID, and its easy to add this before the section of code you want to debug.
+This pops up the ProcessID in a modal message dialob box, and its easy to add this before the section of code you want to debug, using the Message dialog box as a psuedo breakpoint.
 
  Another way to get the ProcessID for the running app is to use [SysInternals procexp64.exe](https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer) but requires you to find a convenient procedure and thus ```Accept``` loop to break into with the Clarion Debugger statement shown below.
 
