@@ -20,6 +20,8 @@ ClarionProc1    Procedure()
     Code
     Glo:CurrentPID = ISWA_GetCurrentProcessId(0)
     Message('Glo:CurrentPID = ' & Glo:CurrentPID)
+    !Run('C:\Clarion11\bin\Cladb.exe -p ' & Glo:CurrentPID, 0) ! Only use this if you want to be stuck in an infinite loop. Runs as elevated as Administrator
+    !Run('C:\Clarion11\bin\Cladbne.exe -p ' & Glo:CurrentPID, 0) ! Only use this if you want to be stuck in an infinite loop. Runs asinvoker and Not Elevated.
 ```
 
 This pops up the ProcessID, and its easy to add this before the section of code you want to debug.
@@ -28,8 +30,14 @@ This pops up the ProcessID, and its easy to add this before the section of code 
 
 Once you have obtained the ProcessID, paste the following into the Run window, or a Dos window, 1234 is replaced by the actual ProcessID.
 
+Elevated to Administrator level
 ```
 "c:\Clarion11\bin\cladb.exe" -p 1234
+```
+
+Non Elevated asInvoker.
+```
+"c:\Clarion11\bin\cladbne.exe" -p 1234
 ```
 
 Once the debugger has loaded, click ```Window```, then click ```Source``` and select the filename.clw for the code you want to debug.
