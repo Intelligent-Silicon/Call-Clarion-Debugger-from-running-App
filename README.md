@@ -44,3 +44,119 @@ Once the debugger has loaded, click ```Window```, then click ```Source``` and se
 
 Set a break point on the line of the code, and this action of selecting a line prompts the debugger into loading the remaining debugger window panes, to then enable you to carry out a debugging session, including stepping into Assembler if you fancy rolling your sleeves up a bit more.
 
+If you want to get technical, check out the ``D32.log``` file, this is the Trace window, that documents the steps the Debugger forms to load an app for debugging from the IDE or by breaking into a running app process which uses this Win32 API [DebugActiveProcess](https://learn.microsoft.com/en-us/windows/win32/api/debugapi/nf-debugapi-debugactiveprocess)
+
+Sample D32.log
+``` 
+Started 
+Heap handle: 06D90000
+start process 
+Debug active process 00001D70
+event 00000000
+Redirection file :> 
+CREATE_PROCESS_DEBUG_EVENT  ! No image name found
+g.debug_name 
+BaseOfImage                00400000
+CREATE_PROCESS_DEBUG_EVENT: process main thread tid=00002634
+thread handle=000005E4
+ntdll.dll Loaded at: 77650000
+No debug information
+CREATE_THREAD_DEBUG_EVENT: tid=00001268
+thread handle=00000600
+CREATE_THREAD_DEBUG_EVENT: tid=00002EC8
+thread handle=00000614
+CREATE_THREAD_DEBUG_EVENT: tid=00002918
+thread handle=00000618
+KERNEL32.dll Loaded at: 75E00000
+No debug information
+KERNELBASE.dll Loaded at: 750F0000
+No debug information
+SHELL32.dll Loaded at: 769C0000
+No debug information
+msvcp_win.dll Loaded at: 767C0000
+No debug information
+ucrtbase.dll Loaded at: 757D0000
+No debug information
+ClaRUN.dll Loaded at: 01000000
+WslDb$$NotifyDebugger 010E0C9C
+USER32.dll Loaded at: 76300000
+No debug information
+ADVAPI32.dll Loaded at: 758F0000
+No debug information
+win32u.dll Loaded at: 76190000
+No debug information
+msvcrt.dll Loaded at: 77450000
+No debug information
+GDI32.dll Loaded at: 750C0000
+No debug information
+SECHOST.dll Loaded at: 75A40000
+No debug information
+gdi32full.dll Loaded at: 76500000
+No debug information
+WinTypes.dll Loaded at: 75540000
+No debug information
+RPCRT4.dll Loaded at: 76900000
+No debug information
+combase.dll Loaded at: 75F00000
+No debug information
+COMDLG32.dll Loaded at: 75980000
+No debug information
+COMCTL32.dll Loaded at: 6B5B0000
+No debug information
+SHCORE.dll Loaded at: 75C40000
+No debug information
+SHLWAPI.dll Loaded at: 753C0000
+No debug information
+ole32.dll Loaded at: 75AE0000
+No debug information
+OLEAUT32.dll Loaded at: 75420000
+No debug information
+MPR.dll Loaded at: 73720000
+No debug information
+oledlg.dll Loaded at: 6E530000
+No debug information
+WINSPOOL.DRV Loaded at: 6E570000
+No debug information
+CFGMGR32.dll Loaded at: 73460000
+No debug information
+ClaTPS.dll Loaded at: 00630000
+No debug information
+IMM32.dll Loaded at: 764D0000
+No debug information
+MSIMG32.dll Loaded at: 6E520000
+No debug information
+UxTheme.dll Loaded at: 729D0000
+No debug information
+TextShaping.dll Loaded at: 6DFA0000
+No debug information
+MSCTF.dll Loaded at: 77520000
+No debug information
+AppCore.dll Loaded at: 74880000
+No debug information
+bcryptPrimitives.dll Loaded at: 75D90000
+No debug information
+TextInputFramework.dll Loaded at: 6E730000
+No debug information
+CREATE_THREAD_DEBUG_EVENT: tid=00000944
+thread handle=00000720
+EXIT_THREAD_DEBUG_EVENT: tid=00000944
+CREATE_THREAD_DEBUG_EVENT: tid=000022F8
+thread handle=00000590
+CREATE_THREAD_DEBUG_EVENT: tid=00000350
+thread handle=0000071C
+EXIT_THREAD_DEBUG_EVENT: tid=00002918
+EXIT_THREAD_DEBUG_EVENT: tid=00002EC8
+EXIT_THREAD_DEBUG_EVENT: tid=00001268
+CoreMessaging.dll Loaded at: 6A9E0000
+No debug information
+CREATE_THREAD_DEBUG_EVENT: tid=00000950
+thread handle=00000C50
+CoreUIComponents.dll Loaded at: 6A740000
+No debug information
+CRYPTBASE.dll Loaded at: 705A0000
+No debug information
+CREATE_THREAD_DEBUG_EVENT: tid=00001D48
+thread handle=00000D40
+CREATE_THREAD_DEBUG_EVENT: tid=00002AD4
+thread handle=00000748
+```
