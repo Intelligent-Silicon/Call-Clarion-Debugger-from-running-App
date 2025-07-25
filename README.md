@@ -2,78 +2,39 @@
 
 Most people are familiar with calling the Clarion Debugger from the IDE, but less are familiar with stepping into the Clarion Debugger from a running App.
 
-Essentially ```"c:\Clarion\bin\cladb.exe" -p 1234``` is all you need BUT there are some circumstances where this wont work. 
 
-This is the code you need in your app to step into the debugger.
+One way to step into a running app to debug it, add the following to the Clarion app.
 
-```Clarion
-    Program
-    
-    Map
-Main        Procedure()
-        Module('api')
+```
+    MAP
+ClarionProc1    Procedure()
+ClarionProc2    Procedure()
+    Module('Api') ! uses C:\Clarion11\Lib\Win32.lib
 ISWA_GetCurrentProcessId(Long),Ulong,Pascal,Name('GetCurrentProcessId')
-        End
+    End
     End
     
-Glo:CurrentPID          Ulong
+    
+ClarionProc1    Procedure()
 
     Code
-    
-    !Run('"C:\Clarion11\bin\Cladbne.exe"', 0) ! Loads Cladb
-    
     Glo:CurrentPID = ISWA_GetCurrentProcessId(0)
-    Message('Glo:CurrentPID = ' & Glo:CurrentPID)   ! Deliberately pauses the program here. Check the value in SysInternals procexp64.exe
-    
-    Glo:DebuggerCommandLine = '"C:\Clarion11\bin\Cladbne.exe" -p ' & Glo:CurrentPID
-    Run(Glo:DebuggerCommandLine, 0) ! Does not "appear" to work
-    
-    Glo:DebuggerCommandLine = '"C:\Clarion11\bin\Cladb.exe" -p ' & Glo:CurrentPID
-    Run(Glo:DebuggerCommandLine, 0) ! Works - Well you get the UAC prompt, but then ClaDB dissappears - Windows Defender possibly?
-    
-    !Run('"C:\Clarion11\bin\Cladbne.exe -p ' & Glo:CurrentPID & '"', 0) ! Does not "appear" to work
-    !Run('"C:\Clarion11\bin\Cladbne.exe"', 0) ! Does not "appear" to work
-    !Run('"C:\Clarion11\bin\Cladbne.exe" -p' & Glo:CurrentPID, 0) ! Does not "appear" to work
-    
-    Main()
-    
-    Return
-    
- Main    Procedure
- 
-Loc:SomeVariable    String(1000)
- 
-    Code
-    
-    Loc:SomeVariable = 'My Text Goes Here'
-    Message(Loc:SomeVariable)
-```    
-
-In the screenshot below you can see the 4 clarion message boxes showing the ProcessIdentifier for each instance of the pcwtpipe.exe. These exe's are inheriting the permissions from Firefox, so having one of these EXE's try to load the Clarion Debugger is going to interfere with the existing permissions. This is why the UAC window is called when the CladDB.exe is used, but no UAC window is seen when trying to use the Non Elevated version of the Clarion Debugger which is called Cladbne.exe. At this stage I havent worked out if its being called, but I suspect its the same reason for both versions of the Clarion Debugger.
-
-![Screenshot](https://github.com/Intelligent-Silicon/Call-Clarion-Debugger-from-running-App/blob/main/ProcessExplorerCladbPermissions.png)
-
-
-So to work around the suspected permission elevation issue, a work around is to start a dos command window, and call the debugger from the command line.
-```
-C:\Clarion11\bin>cladb -p 3816
+    Message('Glo:CurrentPID = ' & Glo:CurrentPID)
 ```
 
-When the debugger is called and open, next click File -> File to Debug and navigate to the folder where the program is located. 
+This pops up the Process ID, and its easy to add this before the section of code you want to debug.
 
-If you have not already done so, copy all the sources file to the folder the program is located to BEFORE selecting the exe. 
-In this example the single pcwtpipe.clw is copied to ```C:\PCWorkTime\addon3```
+ Another way to get the ProcessID for the running app is to use [SysInternals procexp64.exe](https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer) but requires you to find a convenient procedure and thus Accept look to break into with the Clarion Debugger statement shown below.
 
-Wait a moment and the bottom left procedure pane will appear. Click on one of the procedures and the top left source file pane will appear showing the corresponding clw file. 
+Once you have obtained the ProcessID, paste the following into the Run window, or a Dos window, 1234 is replaced by the actual ProcessID.
 
-Now navigate to the procedure and line of source where the message box is located and breakpoint the line after the message box. 
+```
+"c:\Clarion11\bin\cladb.exe" -p 1234
+```
 
-When you click ok, to close down the message box, the debugger will stop of the next line of code, at which point you can now step through the code like normal.
+Once the debugger has loaded, click ```Window```, then click ```Source``` and select the filename.clw for the code you want to debug.
 
-This is a neccesary work around when permissions prevent the clarion debugger from loading or your antivirus is forcing the debugger to close. 
+Set a break point on the line of the code, and this action of selecting a line prompts the debugger into loading the remaining window panes, to then enable you to carry out a debugging session.
 
-At this stage I havent narrowed down what the exact cause it.
+Thats all you need to do regardless of Window Permissions, what other apps have called your Clarion app.
 
-If permissions is not an issue, then the code above will call the Clarion Debugger automatically for you, so that you can then navigate to the line of code and breakpoint the line after to pick up in the debugger after the messagebox has been OK'ed.
-
-.
