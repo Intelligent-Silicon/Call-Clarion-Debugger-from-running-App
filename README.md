@@ -44,6 +44,11 @@ Once the debugger has loaded, click ```Window```, then click ```Source``` and se
 
 Set a break point on the line of the code, and this action of selecting a line prompts the debugger into loading the remaining debugger window panes, to then enable you to carry out a debugging session, including stepping into Assembler if you fancy rolling your sleeves up a bit more.
 
+![Screenshot](https://github.com/Intelligent-Silicon/Call-Clarion-Debugger-from-running-App/blob/main/ClarionDebugger.png)
+
+
+
+
 If you want to get technical, check out the ```D32.log``` file, this is the Trace window, that documents the steps the Debugger peforms to load an app for debugging from the IDE or by breaking into a running app process by using this Win32 API [DebugActiveProcess](https://learn.microsoft.com/en-us/windows/win32/api/debugapi/nf-debugapi-debugactiveprocess). Obviously using this API also presents a security risk so use with caution.
 
 Sample D32.log
