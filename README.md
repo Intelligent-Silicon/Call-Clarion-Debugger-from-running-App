@@ -123,12 +123,12 @@ Anyway the code below pops up the ProcessID in a modal message dialog box, and i
 
 Once you have obtained the ProcessID, paste the following into a Run window, a Dos window, or a Powershell window, and replace 1234 with the actual ProcessID.
 
-Debugger Elevated.  
+Debugger Elevated. Using the Debugger to start the App from the IDE will make the CSIDL represent the Administrator folder paths.
 ```
 "c:\Clarion11\bin\cladb.exe" -p 1234
 ```
 
-Debugger Not Elevated.
+Debugger Not Elevated. Using the Debugger to start the App from the IDE will make the CSIDL represent the logged in User folder paths.
 ```
 "c:\Clarion11\bin\cladbne.exe" -p 1234
 ```
