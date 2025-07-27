@@ -38,7 +38,7 @@ Main        PROCEDURE()
     !Run('C:\Clarion11\bin\Cladbne.exe -p ' & Glo:CurrentPID, 0)
 
 
-    ! After setting your breakpoints, click OK and the debugger will stop at the first breakpoint it encounters after this message.
+    ! After setting your breakpoints, click the message box OK button and the debugger will stop at the first breakpoint it encounters after this message.
     Message('Glo:CurrentPID = ' & Glo:CurrentPID) ! This halts the program so the Debugger can load properly.    
     
     ! Set you breakpoint on Main()
