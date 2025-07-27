@@ -6,27 +6,44 @@ Most people are familiar with calling the Clarion Debugger from the IDE, but les
 One way to step into a running app to debug it, is add the following to the Clarion app.
 
 ```clarion
-    Program
+    
+    PROGRAM 
+Glo:CurrentPID          Ulong
+    
     MAP
-ClarionProc1    Procedure()
-ClarionProc2    Procedure()
-    Module('Api') ! uses C:\Clarion11\Lib\Win32.lib
-ISWA_GetCurrentProcessId(Long),Ulong,Pascal,Name('GetCurrentProcessId')
-    End
-    End
-    
-    
-ClarionProc1    Procedure()
+Main        PROCEDURE()
+    MODULE('api')
+    ISWA_GetCurrentProcessId(Long),Ulong,Pascal,Name('GetCurrentProcessId')
+    END
 
-    Code
+    END
+
+    CODE
+
     OMIT('DebugOnly',_DEBUG_)
-        Halt(0,'Not Compiled for Debugging')
-    !DebugOnly
-    
+        Halt(0,'Not Compiled for Debugging<32,10>In the IDE, select Build, Set Configuration, Debug')
+    !DebugOnly  
+
     Glo:CurrentPID = ISWA_GetCurrentProcessId(0)
-    Message('Glo:CurrentPID = ' & Glo:CurrentPID)
-    !Run('C:\Clarion11\bin\Cladb.exe -p ' & Glo:CurrentPID, 0) ! Only use this if you want to be stuck in an infinite loop. Runs as elevated as Administrator
-    !Run('C:\Clarion11\bin\Cladbne.exe -p ' & Glo:CurrentPID, 0) ! Only use this if you want to be stuck in an infinite loop. Runs asinvoker and Not Elevated.
+
+    ! Debugger Elevated running as Administrator, so different CSIDL paths apply  
+    Run('C:\Clarion11\bin\Cladb.exe -p ' & Glo:CurrentPID, 0)
+
+    ! Debugger Not Elevated running as User, so the logged on User's CSIDL paths apply.
+    !Run('C:\Clarion11\bin\Cladbne.exe -p ' & Glo:CurrentPID, 0)
+
+    Message('Glo:CurrentPID = ' & Glo:CurrentPID) ! This halts the program so the Debugger can load properly.    
+    
+    Main()
+    Return
+
+Main    Procedure
+
+    Code              
+            
+    Message('Another Message Box')
+
+    ! Implicit Return
 ```
 
 Tip.
@@ -35,11 +52,11 @@ If you are going to be copying a Project to new folders in order to debug & test
 
 ```
 <PropertyGroup>
-    <SolutionDir>C:\ClaAppName\v1\test\</SolutionDir>
+    <SolutionDir>C:\ClaDebugProcess\</SolutionDir>
     <SolutionExt>.sln</SolutionExt>
-    <SolutionFileName>ClaAppName.sln</SolutionFileName>
+    <SolutionFileName>ClaDebugProcess.sln</SolutionFileName>
     <SolutionName>ClaAppName</SolutionName>
-    <SolutionPath>C:\ClaAppName\v1\test\ClaAppName.sln</SolutionPath>
+    <SolutionPath>C:\ClaDebugProcess\ClaDebugProcess.sln</SolutionPath>
   </PropertyGroup>
 ```
 
@@ -92,114 +109,160 @@ If you want to get technical, check out the ```D32.log``` file, this is the Trac
 Sample D32.log
 ``` 
 Started 
-Heap handle: 06D90000
+Heap handle: 06A20000
 start process 
-Debug active process 00001D70
+Debug active process 00000764
 event 00000000
 Redirection file :> 
 CREATE_PROCESS_DEBUG_EVENT  ! No image name found
 g.debug_name 
 BaseOfImage                00400000
-CREATE_PROCESS_DEBUG_EVENT: process main thread tid=00002634
-thread handle=000005E4
-ntdll.dll Loaded at: 77650000
+CREATE_PROCESS_DEBUG_EVENT: process main thread tid=00001044
+thread handle=00000598
+ntdll.dll Loaded at: 76FF0000
 No debug information
-CREATE_THREAD_DEBUG_EVENT: tid=00001268
-thread handle=00000600
-CREATE_THREAD_DEBUG_EVENT: tid=00002EC8
-thread handle=00000614
-CREATE_THREAD_DEBUG_EVENT: tid=00002918
-thread handle=00000618
-KERNEL32.dll Loaded at: 75E00000
+CREATE_THREAD_DEBUG_EVENT: tid=00001D60
+thread handle=0000058C
+CREATE_THREAD_DEBUG_EVENT: tid=000029D4
+thread handle=000005D0
+CREATE_THREAD_DEBUG_EVENT: tid=000024A8
+thread handle=00000584
+CREATE_THREAD_DEBUG_EVENT: tid=00002B24
+thread handle=0000062C
+CREATE_THREAD_DEBUG_EVENT: tid=000011E8
+thread handle=00000630
+CREATE_THREAD_DEBUG_EVENT: tid=00000AAC
+thread handle=00000634
+CREATE_THREAD_DEBUG_EVENT: tid=000028A4
+thread handle=00000624
+CREATE_THREAD_DEBUG_EVENT: tid=00003290
+thread handle=00000640
+CREATE_THREAD_DEBUG_EVENT: tid=00003294
+thread handle=00000644
+CREATE_THREAD_DEBUG_EVENT: tid=000026BC
+thread handle=00000648
+KERNEL32.dll Loaded at: 75E60000
 No debug information
-KERNELBASE.dll Loaded at: 750F0000
-No debug information
-SHELL32.dll Loaded at: 769C0000
-No debug information
-msvcp_win.dll Loaded at: 767C0000
-No debug information
-ucrtbase.dll Loaded at: 757D0000
+KERNELBASE.dll Loaded at: 762B0000
 No debug information
 ClaRUN.dll Loaded at: 01000000
 WslDb$$NotifyDebugger 010E0C9C
-USER32.dll Loaded at: 76300000
+ADVAPI32.dll Loaded at: 76650000
 No debug information
-ADVAPI32.dll Loaded at: 758F0000
+msvcrt.dll Loaded at: 76580000
 No debug information
-win32u.dll Loaded at: 76190000
+SECHOST.dll Loaded at: 766F0000
 No debug information
-msvcrt.dll Loaded at: 77450000
+RPCRT4.dll Loaded at: 76040000
 No debug information
-GDI32.dll Loaded at: 750C0000
+COMDLG32.dll Loaded at: 75B50000
 No debug information
-SECHOST.dll Loaded at: 75A40000
+msvcp_win.dll Loaded at: 76220000
 No debug information
-gdi32full.dll Loaded at: 76500000
+ucrtbase.dll Loaded at: 76E30000
 No debug information
-WinTypes.dll Loaded at: 75540000
+combase.dll Loaded at: 74A70000
 No debug information
-RPCRT4.dll Loaded at: 76900000
+SHCORE.dll Loaded at: 74F30000
 No debug information
-combase.dll Loaded at: 75F00000
+USER32.dll Loaded at: 75860000
 No debug information
-COMDLG32.dll Loaded at: 75980000
+win32u.dll Loaded at: 75E10000
 No debug information
-COMCTL32.dll Loaded at: 6B5B0000
+GDI32.dll Loaded at: 75E30000
 No debug information
-SHCORE.dll Loaded at: 75C40000
+gdi32full.dll Loaded at: 76BE0000
 No debug information
-SHLWAPI.dll Loaded at: 753C0000
+SHLWAPI.dll Loaded at: 75FC0000
 No debug information
-ole32.dll Loaded at: 75AE0000
+SHELL32.dll Loaded at: 75190000
 No debug information
-OLEAUT32.dll Loaded at: 75420000
+WinTypes.dll Loaded at: 74D00000
 No debug information
-MPR.dll Loaded at: 73720000
+ole32.dll Loaded at: 75C10000
 No debug information
-oledlg.dll Loaded at: 6E530000
+OLEAUT32.dll Loaded at: 75AA0000
 No debug information
-WINSPOOL.DRV Loaded at: 6E570000
+COMCTL32.dll Loaded at: 69560000
 No debug information
-CFGMGR32.dll Loaded at: 73460000
+MPR.dll Loaded at: 72A30000
 No debug information
-ClaTPS.dll Loaded at: 00630000
+WINSPOOL.DRV Loaded at: 6DAF0000
 No debug information
-IMM32.dll Loaded at: 764D0000
+CFGMGR32.dll Loaded at: 73810000
 No debug information
-MSIMG32.dll Loaded at: 6E520000
+oledlg.dll Loaded at: 72690000
 No debug information
-UxTheme.dll Loaded at: 729D0000
+IMM32.dll Loaded at: 75830000
 No debug information
-TextShaping.dll Loaded at: 6DFA0000
+MSIMG32.dll Loaded at: 72670000
 No debug information
-MSCTF.dll Loaded at: 77520000
+Windows.Storage.dll Loaded at: 73BB0000
 No debug information
-AppCore.dll Loaded at: 74880000
+bcryptPrimitives.dll Loaded at: 76D50000
 No debug information
-bcryptPrimitives.dll Loaded at: 75D90000
+AppCore.dll Loaded at: 73AB0000
 No debug information
-TextInputFramework.dll Loaded at: 6E730000
+UxTheme.dll Loaded at: 749D0000
 No debug information
-CREATE_THREAD_DEBUG_EVENT: tid=00000944
-thread handle=00000720
-EXIT_THREAD_DEBUG_EVENT: tid=00000944
-CREATE_THREAD_DEBUG_EVENT: tid=000022F8
-thread handle=00000590
-CREATE_THREAD_DEBUG_EVENT: tid=00000350
-thread handle=0000071C
-EXIT_THREAD_DEBUG_EVENT: tid=00002918
-EXIT_THREAD_DEBUG_EVENT: tid=00002EC8
-EXIT_THREAD_DEBUG_EVENT: tid=00001268
-CoreMessaging.dll Loaded at: 6A9E0000
+PROPSYS.dll Loaded at: 73990000
 No debug information
-CREATE_THREAD_DEBUG_EVENT: tid=00000950
-thread handle=00000C50
-CoreUIComponents.dll Loaded at: 6A740000
+CLBCatQ.DLL Loaded at: 76F50000
 No debug information
-CRYPTBASE.dll Loaded at: 705A0000
+Windows.FileExplorer.Common.dll Loaded at: 738F0000
 No debug information
-CREATE_THREAD_DEBUG_EVENT: tid=00001D48
-thread handle=00000D40
-CREATE_THREAD_DEBUG_EVENT: tid=00002AD4
-thread handle=00000748
+profapi.dll Loaded at: 738C0000
+No debug information
+Windows.StateRepositoryPS.dll Loaded at: 6AC40000
+No debug information
+Windows.StateRepositoryClient.dll Loaded at: 725D0000
+No debug information
+edputil.dll Loaded at: 725B0000
+No debug information
+urlmon.dll Loaded at: 723F0000
+No debug information
+iertutil.dll Loaded at: 721A0000
+No debug information
+srvcli.dll Loaded at: 72170000
+No debug information
+netutils.dll Loaded at: 72680000
+No debug information
+cldapi.dll Loaded at: 72140000
+No debug information
+SspiCli.dll Loaded at: 743D0000
+No debug information
+VirtDisk.dll Loaded at: 72120000
+No debug information
+Wldp.dll Loaded at: 720C0000
+No debug information
+pcacli.dll Loaded at: 720A0000
+No debug information
+sfc_os.dll Loaded at: 72090000
+No debug information
+ServicingCommon.dll Loaded at: 71FD0000
+No debug information
+SETUPAPI.dll Loaded at: 76780000
+No debug information
+TextShaping.dll Loaded at: 6D5B0000
+No debug information
+MSCTF.dll Loaded at: 74E10000
+No debug information
+TextInputFramework.dll Loaded at: 6E000000
+No debug information
+CREATE_THREAD_DEBUG_EVENT: tid=0000087C
+thread handle=00000728
+EXIT_THREAD_DEBUG_EVENT: tid=0000087C
+EXIT_THREAD_DEBUG_EVENT: tid=000028A4
+EXIT_THREAD_DEBUG_EVENT: tid=000024A8
+EXIT_THREAD_DEBUG_EVENT: tid=00001D60
+EXIT_THREAD_DEBUG_EVENT: tid=000029D4
+CoreMessaging.dll Loaded at: 6DF20000
+No debug information
+CREATE_THREAD_DEBUG_EVENT: tid=00002C20
+thread handle=0000058C
+CoreUIComponents.dll Loaded at: 6DC80000
+No debug information
+CRYPTBASE.dll Loaded at: 74400000
+No debug information
+UNLOAD_DLL_DEBUG_EVENT: BaseOfDll 6AC40000
 ```
