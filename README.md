@@ -31,7 +31,7 @@ ClarionProc1    Procedure()
 
 Tip.
 
-If you are going to be copying a Project to new folders in order to debug & test the performance of different sections of code, you need to edit the ```"Clarion_AppName".sln.cache``` to update the new folder location.
+If you are going to be copying a Project to new folders in order to debug & test the performance of different sections of code, you need to edit the ```"Clarion_AppName".sln.cache``` to update the new folder location (see below).
 
 ```
 <PropertyGroup>
