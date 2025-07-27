@@ -73,7 +73,7 @@ and
 
 
 
-Everytime you copy the Project files eg. (.clw, .sln, .cache, .cwproj, .red) to a new folder, edit the ```"Clarion_AppName".sln.cache``` and ```"Clarion_AppName".cwproj```, load it into the IDE and compile it, the Build Configuration Set will default to ```Release``` and not ```Debug```. So the code below will throw an error message when its not compiled for Debugging.
+Everytime you copy the Project files eg. (.clw, .sln, .cache, .cwproj, .red, etc.) to a new folder, edit the ```"Clarion_AppName".sln.cache``` and ```"Clarion_AppName".cwproj```, load it into the IDE and compile it, the Build Configuration Set will default to ```Release``` and not ```Debug```. So the code below will throw an error message when its not compiled for Debugging.
 
 ```clarion
    OMIT('DebugOnly',_DEBUG_)
