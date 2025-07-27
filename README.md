@@ -46,10 +46,12 @@ Main        PROCEDURE()
     ! Set your breakpoint(s), for this example set the Breakpoint on Main().
     ! Once the Breakpoint is set, click OK on the Message('Glo:CurrentPID = ' & Glo:CurrentPID) message box.
     
-    ! Debugger Elevated  
+    ! CSIDL (Constant Special item ID List) https://learn.microsoft.com/en-us/windows/win32/shell/csidl
+    
+    ! Debugger Elevated - Using the Debugger to start the App from the IDE will make the CSIDL represent the Administrator folder paths.
     Run('C:\Clarion11\bin\Cladb.exe -p ' & Glo:CurrentPID, 0)
 
-    ! Debugger Not Elevated
+    ! Debugger Not Elevated - Using the Debugger to start the App from the IDE will make the CSIDL represent the logged in User folder paths.
     !Run('C:\Clarion11\bin\Cladbne.exe -p ' & Glo:CurrentPID, 0)
 
 
