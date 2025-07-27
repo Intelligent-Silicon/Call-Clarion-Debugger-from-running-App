@@ -55,13 +55,25 @@ If you are going to be copying a Project to new folders in order to debug & test
     <SolutionDir>C:\ClaDebugProcess\</SolutionDir>
     <SolutionExt>.sln</SolutionExt>
     <SolutionFileName>ClaDebugProcess.sln</SolutionFileName>
-    <SolutionName>ClaAppName</SolutionName>
+    <SolutionName>ClaDebugProcess</SolutionName>
     <SolutionPath>C:\ClaDebugProcess\ClaDebugProcess.sln</SolutionPath>
   </PropertyGroup>
 ```
 
+You'll also need to edit the Clarion_AppName.cwproj file.
+```
+    <RootNamespace>ClaDebugProcess</RootNamespace>
+    <AssemblyName>ClaDebugProcess</AssemblyName>
+    <OutputName>ClaDebugProcess</OutputName>
+```
+and 
+```
+    <Compile Include="ClaDebugProcess.clw" />
+```
 
-Everytime you copy the Project files eg. (.clw, .sln, .cache, .cwproj, .red) to a new folder, edit the ```"Clarion_AppName".sln.cache```, load it into the IDE and compile it, the Build Configuration Set will default to ```Release``` and not ```Debug```. So the code below will throw an error message when its not compiled for Debugging.
+
+
+Everytime you copy the Project files eg. (.clw, .sln, .cache, .cwproj, .red) to a new folder, edit the ```"Clarion_AppName".sln.cache``` and ```"Clarion_AppName".cwproj```, load it into the IDE and compile it, the Build Configuration Set will default to ```Release``` and not ```Debug```. So the code below will throw an error message when its not compiled for Debugging.
 
 ```clarion
    OMIT('DebugOnly',_DEBUG_)
