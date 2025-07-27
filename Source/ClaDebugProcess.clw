@@ -1,12 +1,19 @@
 
     PROGRAM 
 
-Glo:CurrentPID          Ulong
-    
+Glo:CurrentPID              Ulong 
+! https://github.com/Intelligent-Silicon/CSIDL
+ISEQ:CSIDL_DESKTOP          Equate(0)  ! C:\Users\Admin1\Desktop
+ISEQ:CSIDL_COMMON_STARTUP   Equate(24) ! C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup
+ISEQ:CSIDL_APPDATA          Equate(26) ! C:\Users\Admin1\AppData\Roaming
+ISEQ:CSIDL_COMMON_APPDATA   Equate(35) ! C:\ProgramData or C:\Documents and Settings\All Users\Application Data
+Glo:CSIDL_FolderPath        Cstring(1024)
+Glo:RVLong                  Long ! Return Value Long
     MAP
 Main        PROCEDURE()
     MODULE('api')
     ISWA_GetCurrentProcessId(Long),Ulong,Pascal,Name('GetCurrentProcessId')
+    ISWA_SHGetFolderPathA(Long, Long, Long, Ulong, Long), Long, Pascal,Raw,Name('SHGetFolderPathA') 
     END
 
     END
@@ -31,10 +38,10 @@ Main        PROCEDURE()
     ! Set your breakpoint(s), for this example set the Breakpoint on Main().
     ! Once the Breakpoint is set, click OK on the Message('Glo:CurrentPID = ' & Glo:CurrentPID) message box.
     
-    ! Debugger Elevated running as Administrator, so Administrator CSIDL paths apply  
+    ! Debugger Elevated  
     Run('C:\Clarion11\bin\Cladb.exe -p ' & Glo:CurrentPID, 0)
 
-    ! Debugger Not Elevated running as User, so the logged on User's CSIDL paths apply.
+    ! Debugger Not Elevated
     !Run('C:\Clarion11\bin\Cladbne.exe -p ' & Glo:CurrentPID, 0)
 
 
@@ -50,5 +57,8 @@ Main    Procedure
     Code              
             
     Message('Another Message Box')
-
+    Glo:RVLong = ISWA_SHGetFolderPathA(0,ISEQ:CSIDL_APPDATA,0,0,Address(Glo:CSIDL_FolderPath))
+    IF Glo:CSIDL_FolderPath
+        Message('Glo:CSIDL_FolderPath = ' & Glo:CSIDL_FolderPath )
+    End
     ! Implicit Return
