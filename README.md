@@ -29,6 +29,8 @@ ClarionProc1    Procedure()
     !Run('C:\Clarion11\bin\Cladbne.exe -p ' & Glo:CurrentPID, 0) ! Only use this if you want to be stuck in an infinite loop. Runs asinvoker and Not Elevated.
 ```
 
+Tip.
+
 If you are going to be copying a Project to new folders in order to debug & test the performance of different sections of code, you need to edit the Clarion_AppName.sln.cache to update the new folder location.
 
 ```
@@ -51,7 +53,12 @@ Everytime you copy the Project to a new folder, edit the Clarion_AppName.sln.cac
 ```
 
 
-This pops up the ProcessID in a modal message dialog box, and its easy to add this before the section of code you want to debug, using the message dialog box as a psuedo breakpoint.
+Anyway the code below pops up the ProcessID in a modal message dialog box, and its easy to add this before the section of code you want to debug, using the message dialog box as a psuedo breakpoint.
+
+```clarion
+    Glo:CurrentPID = ISWA_GetCurrentProcessId(0)
+    Message('Glo:CurrentPID = ' & Glo:CurrentPID)
+```
 
 
 
