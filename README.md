@@ -46,7 +46,7 @@ If you are going to be copying a Project to new folders in order to debug & test
 
 Everytime you copy the Project to a new folder, edit the Clarion_AppName.sln.cache, load it into the IDE and compile it, the Build Configuration Set will default to ```Release``` and not ```Debug```. So the code below will throw an error message when its not compiled for Debugging.
 
-```
+```clarion
    OMIT('DebugOnly',_DEBUG_)
         Halt(0,'Not Compiled for Debugging')
     !DebugOnly
