@@ -60,7 +60,7 @@ If you are going to be copying a Project to new folders in order to debug & test
   </PropertyGroup>
 ```
 
-You'll also need to edit the Clarion_AppName.cwproj file.
+You'll also need to edit the ```"Clarion_AppName".cwproj``` file.
 ```
     <RootNamespace>ClaDebugProcess</RootNamespace>
     <AssemblyName>ClaDebugProcess</AssemblyName>
