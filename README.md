@@ -6,6 +6,7 @@ Most people are familiar with calling the Clarion Debugger from the IDE, but les
 One way to step into a running app to debug it, is add the following to the Clarion app.
 
 ```clarion
+    Program
     MAP
 ClarionProc1    Procedure()
 ClarionProc2    Procedure()
@@ -18,13 +19,41 @@ ISWA_GetCurrentProcessId(Long),Ulong,Pascal,Name('GetCurrentProcessId')
 ClarionProc1    Procedure()
 
     Code
+    OMIT('DebugOnly',_DEBUG_)
+        Halt(0,'Not Compiled for Debugging')
+    !DebugOnly
+    
     Glo:CurrentPID = ISWA_GetCurrentProcessId(0)
     Message('Glo:CurrentPID = ' & Glo:CurrentPID)
     !Run('C:\Clarion11\bin\Cladb.exe -p ' & Glo:CurrentPID, 0) ! Only use this if you want to be stuck in an infinite loop. Runs as elevated as Administrator
     !Run('C:\Clarion11\bin\Cladbne.exe -p ' & Glo:CurrentPID, 0) ! Only use this if you want to be stuck in an infinite loop. Runs asinvoker and Not Elevated.
 ```
 
+If you are going to be copying a Project to new folders in order to debug & test the performance of different sections of code, you need to edit the Clarion_AppName.sln.cache to update the new folder location.
+
+```
+<PropertyGroup>
+    <SolutionDir>C:\ClaAppName\v1\test\</SolutionDir>
+    <SolutionExt>.sln</SolutionExt>
+    <SolutionFileName>ClaAppName.sln</SolutionFileName>
+    <SolutionName>ClaAppName</SolutionName>
+    <SolutionPath>C:\ClaAppName\v1\test\ClaAppName.sln</SolutionPath>
+  </PropertyGroup>
+```
+
+
+Everytime you copy the Project to a new folder, edit the Clarion_AppName.sln.cache, load it into the IDE and compile it, the Build Configuration Set will default to ```Release``` and not ```Debug```. So the code below will throw an error message when its not compiled for Debugging.
+
+```
+   OMIT('DebugOnly',_DEBUG_)
+        Halt(0,'Not Compiled for Debugging')
+    !DebugOnly
+```
+
+
 This pops up the ProcessID in a modal message dialog box, and its easy to add this before the section of code you want to debug, using the message dialog box as a psuedo breakpoint.
+
+
 
  Another way to get the ProcessID for the running app is to use [SysInternals procexp64.exe](https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer) but requires you to find a convenient procedure and thus ```Accept``` loop to break into with the Clarion Debugger statement shown below.
 
@@ -41,6 +70,8 @@ Non Elevated asInvoker.
 ```
 
 Once the debugger has loaded, click ```Window```, then click ```Source``` and select the ```filename.clw``` for the code you want to debug.
+
+![Screenshot](https://github.com/Intelligent-Silicon/Call-Clarion-Debugger-from-running-App/blob/main/SelectSourceCLW.png)
 
 Set a break point on the line of the code, and this action of selecting a line prompts the debugger into loading the remaining debugger window panes, to then enable you to carry out a debugging session, including stepping into Assembler if you fancy rolling your sleeves up a bit more.
 
