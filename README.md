@@ -78,7 +78,7 @@ Everytime you copy the Project files eg. (.clw, .sln, .cache, .cwproj, .red, etc
 ```clarion
    OMIT('DebugOnly',_DEBUG_)
         Halt(0,'Not Compiled for Debugging')
-    !DebugOnly
+   !DebugOnly
 ```
 
 
@@ -95,12 +95,12 @@ Anyway the code below pops up the ProcessID in a modal message dialog box, and i
 
 Once you have obtained the ProcessID, paste the following into a Run window, a Dos window, or a Powershell window, and replace 1234 with the actual ProcessID.
 
-Elevated to Administrator level
+Debugger Elevated running as Administrator, so different CSIDL paths apply.  
 ```
 "c:\Clarion11\bin\cladb.exe" -p 1234
 ```
 
-Non Elevated asInvoker.
+Debugger Not Elevated running as User, so the logged on User's CSIDL paths apply.
 ```
 "c:\Clarion11\bin\cladbne.exe" -p 1234
 ```
