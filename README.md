@@ -76,6 +76,11 @@ Main    Procedure
 
 Tip.
 
+Either change %AppData%\SoftVelocity\Clarion\11.0\ClarionProperties.xml to False [Default:True]
+  <SharpDevelop.UseReleaseAsDefault value="False" />
+  
+  OR 
+  
 If you are going to be copying a Project to new folders in order to debug & test the performance of different sections of code, you need to edit the ```"Clarion_AppName".sln.cache``` to update the new folder location (see below).
 
 ```
