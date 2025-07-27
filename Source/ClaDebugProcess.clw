@@ -31,7 +31,7 @@ Main        PROCEDURE()
     ! Set your breakpoint(s), for this example set the Breakpoint on Main().
     ! Once the Breakpoint is set, click OK on the Message('Glo:CurrentPID = ' & Glo:CurrentPID) message box.
     
-    ! Debugger Elevated running as Administrator, so different CSIDL paths apply  
+    ! Debugger Elevated running as Administrator, so Administrator CSIDL paths apply  
     Run('C:\Clarion11\bin\Cladb.exe -p ' & Glo:CurrentPID, 0)
 
     ! Debugger Not Elevated running as User, so the logged on User's CSIDL paths apply.

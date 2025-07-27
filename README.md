@@ -95,7 +95,7 @@ Anyway the code below pops up the ProcessID in a modal message dialog box, and i
 
 Once you have obtained the ProcessID, paste the following into a Run window, a Dos window, or a Powershell window, and replace 1234 with the actual ProcessID.
 
-Debugger Elevated running as Administrator, so different CSIDL paths apply.  
+Debugger Elevated running as Administrator, so Administrator CSIDL paths apply.  
 ```
 "c:\Clarion11\bin\cladb.exe" -p 1234
 ```
@@ -117,6 +117,12 @@ Set a break point on the line of the code, and this action of selecting a line p
 
 
 If you want to get technical, check out the ```D32.log``` file, this is the Trace window, that documents the steps the Debugger peforms to load an app for debugging from the IDE or by breaking into a running app process by using this Win32 API [DebugActiveProcess](https://learn.microsoft.com/en-us/windows/win32/api/debugapi/nf-debugapi-debugactiveprocess). Obviously using this API also presents a security risk so use with caution.
+
+
+[ClaDebugProcess.sln.cache](https://github.com/Intelligent-Silicon/Call-Clarion-Debugger-from-running-App/blob/main/Source/ClaDebugProcess.sln.cache)
+[ClaDebugProcess.sln](https://github.com/Intelligent-Silicon/Call-Clarion-Debugger-from-running-App/blob/main/Source/ClaDebugProcess.sln)
+[ClaDebugProcess.cwproj](https://github.com/Intelligent-Silicon/Call-Clarion-Debugger-from-running-App/blob/main/Source/ClaDebugProcess.cwproj)
+[ClaDebugProcess.clw](https://github.com/Intelligent-Silicon/Call-Clarion-Debugger-from-running-App/blob/main/Source/ClaDebugProcess.clw)
 
 Sample D32.log
 ``` 
