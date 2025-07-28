@@ -457,7 +457,11 @@ The general rule is take the first address shown in the ```Assert()``` window ``
 
 In this example ```4011C4 EXAMPLE6STACKTRACEB@F - 4198852``` has an address which is lower than ```004011FE``` aka ```4198910``` so it probably resides in the procedure ```Example6StackTraceB```, which we know because we can also see and compile the program source ```ClaDebugProcess.clw``` and it also happens to be on Line 142 of all things!
 
-The rest of ```MAP``` is worth exploring but beyond the scope of this Repo.
+Repeat for the 2nd and subsequent lines in the ```Call Stack```.
+
+At this stage, and with a certain level of practice, you wont need to use the Debug version of the Clarion Runtime, which is why its not included first in the ```*.dll = %BIN%\Debug;%BIN%;%BIN%\AddIns\BackendBindings\ClarionBinding\Common;%ROOT%\Accessory\bin``` ```[Copy]``` section of the ```Clarion110.RED``` Redirection file.
+
+The rest of ```MAP``` file is worth exploring to become familiar with it but thats beyond the scope of this Repo.
 
 Anyway when trying to narrow down the source of the problem, we have to start at the top of the ```Call Stack``` and work backwards, so downwards. The number of lines in the ```Call Stack``` can be variable as it depends on how many times a different procedure has been called since the start, which in this case is ```_main```. 
 
