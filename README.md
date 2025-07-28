@@ -272,7 +272,7 @@ Example2IfConditionAssert    Procedure
 ```
 
 ### Example3Compile_Debug_CompilerFlag
-This example uses the ```Compile``` directive to instruction the compiler to include the code wrapped between ```Compile('DebugOnly',_DEBUG_)``` and ```DebugOnly```. The ```!``` preceeding the ```DebugOnly``` is for visual reasons only to turn the line into a comment in the Editor and it could be removed. The compiler will remove the line ```!DebugOnly``` at compile time.
+This example uses the ```Compile``` directive to instruct the compiler to include the code wrapped between ```Compile('DebugOnly',_DEBUG_)``` and ```DebugOnly``` when the Build Configuration is set to ```Debug```. The ```!``` preceeding the ```DebugOnly``` is for visual reasons only to turn the line into a comment in the Text Editor and it could be removed. The Compiler will remove the line ```DebugOnly``` at compile time, leaving the ```!``` in place to do nothing.
 
 ```clarion
 Example3Compile_Debug_CompilerFlag    Procedure()
@@ -285,3 +285,51 @@ Example3Compile_Debug_CompilerFlag    Procedure()
     !DebugOnly
 ```
 
+### Example4Omit_Debug_CompilerFlag
+This example use the ```Omit``` directive to instuct the compiler to exclude the code wrapped between ```Omit('ReleaseOnly',_DEBUG_)``` and ```ReleaseOnly``` when the Build Configuration is set to ```Debug```. This is the opposite of ```Example3Compile_Debug_CompilerFlag``` so when this program is compiled in ```Release``` mode, the code will be included by the Compiler enabling it to be called, even though you cant debug a program in ```Release``` mode. The ```!``` preceeding the ```ReleaseOnly``` is for visual reasons only to turn the line into a comment in the Text Editor and it could be removed. The compiler will remove the line ```ReleaseOnly``` at compile time, leaving the ```!``` in place to do nothing. 
+
+```clarion
+Example4Omit_Debug_CompilerFlag    Procedure()
+    Code
+    ! You cant debug a Release version in reality, but demonstrates how ClaDBne.exe could be called.
+    ! CallDebuggerNE() is added to the Assert Expression - it should return 0
+    Omit('ReleaseOnly',_DEBUG_) 
+        Assert(0+CallDebuggerNE(),'Debugger, Window, Source, select Filename.clw, Breakpoint Line 109, then return here, click Continue button below.' )
+        Glo:SVCstring = 'You cant debug in Release Mode'
+        Message(Glo:SVCstring &'<32,10>'& Glo:CSIDL_FolderPath,'Example4Omit_Debug_CompilerFlag')
+    !ReleaseOnly  
+```
+
+### Example5Col1QuestionMark
+This example uses the question mark ```?``` in Column 1 of the Text Editor to include the line of code when the Build Configuration is set to 
+
+```Debug```. When the Build Configuration is set to ```Release``` these lines of code will not be included by the Compiler.
+
+```clarion
+Example5Col1QuestionMark    Procedure()
+    Code
+    ! CallDebuggerNE() is added to the Assert Expression - it should return 0
+?   Assert(0+CallDebuggerNE(),'Debugger, Window, Source, select Filename.clw, Breakpoint Line 117, then return here, click Continue button below.' )
+?   Glo:SVCstring = '? in column 1 for Build Configuration:Debug'
+?   Message(Glo:SVCstring &'<32,10>'& Glo:CSIDL_FolderPath,'Example5Col1QuestionMark')
+```
+
+### CallDebugger
+This procedure calls the Clarion Debugger running it Elevated. Any ```ErrorCode()``` by the ```Run``` statement will be returned, otherwise ```ErrorCode()``` just returns 0.
+
+```clarion
+CallDebugger    PROCEDURE()
+    Code
+    Run('C:\Clarion11\bin\Cladb.exe -p ' & Glo:CurrentPID, 0)
+    Return ErrorCode() ! ErrorCode should return 0
+```
+
+### CallDebuggerNE
+This procedure calls the Clarion Debugger running Not Elevated. Any ```ErrorCode()``` by the ```Run``` statement will be returned, otherwise ```ErrorCode()``` just returns 0.
+
+```clarion
+CallDebuggerNE  PROCEDURE()
+    Code  
+    Run('C:\Clarion11\bin\Cladbne.exe -p ' & Glo:CurrentPID, 0)
+    Return ErrorCode() ! ErrorCode should return 0
+```
