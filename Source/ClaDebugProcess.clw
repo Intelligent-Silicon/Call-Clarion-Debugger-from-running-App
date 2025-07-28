@@ -19,6 +19,10 @@ Example2IfConditionAssert           PROCEDURE()
 Example3Compile_Debug_CompilerFlag  PROCEDURE()
 Example4Omit_Debug_CompilerFlag     PROCEDURE()
 Example5Col1QuestionMark            PROCEDURE()
+Example6StackTrace                  PROCEDURE()
+Example6StackTraceA                 PROCEDURE()
+Example6StackTraceB                 PROCEDURE()
+Example6StackTraceC                 PROCEDURE()
 CallDebugger                        PROCEDURE(),Long,Proc
 CallDebuggerNE                      PROCEDURE(),Long,Proc
 
@@ -55,6 +59,7 @@ CallDebuggerNE                      PROCEDURE(),Long,Proc
     Example3Compile_Debug_CompilerFlag()
     Example4Omit_Debug_CompilerFlag()
     Example5Col1QuestionMark()
+    Example6StackTrace()
     Return
   
 Example1CaseMessage    Procedure
@@ -86,7 +91,7 @@ Example2IfConditionAssert    Procedure
     ! If Condition CallDebugger() and standard Assert()
     IF Glo:SomeCondition = True 
         CallDebugger()  
-        Assert(0,'Debugger, Window, Source, select Filename.clw, Breakpoint Line 90, then return here, click Continue button below.')
+        Assert(0,'Example2IfConditionAssert:Debugger, Window, Source, select Filename.clw, Breakpoint Line 90, then return here, click Continue button below.')
         Glo:SVCstring = 'If Condition, CallDebugger() and standard Assert()'
         Message(Glo:SVCstring &'<32,10>'& Glo:CSIDL_FolderPath,'Example2IfConditionAssert')
     End
@@ -95,7 +100,7 @@ Example3Compile_Debug_CompilerFlag    Procedure()
     Code
     ! CallDebugger() is appended to the Assert Message - it should return 0  
     Compile('DebugOnly',_DEBUG_) 
-        Assert(0,'Debugger, Window, Source, select Filename.clw, Breakpoint Line 99, then return here, click Continue button below.' & CallDebugger())
+        Assert(0,'Example3Compile_Debug_CompilerFlag:Debugger, Window, Source, select Filename.clw, Breakpoint Line 99, then return here, click Continue button below.' & CallDebugger())
         Glo:SVCstring = 'CallDebugger() is appended to the Assert Message'
         Message(Glo:SVCstring &'|'& Glo:CSIDL_FolderPath,'Example3Compile_Debug_CompilerFlag')
     !DebugOnly
@@ -103,20 +108,44 @@ Example3Compile_Debug_CompilerFlag    Procedure()
 Example4Omit_Debug_CompilerFlag    Procedure()
     Code
     ! You cant debug a Release version in reality, but demonstrates how ClaDBne.exe could be called.
+    ! Whilst its good being able to step into the Debugger, if you use multiple Assert()'s, using the Non Elevated
+    ! removes the UAC prompt choice to not launch the debugger when not using the Debugger to start the program
+    ! from the IDE.
     ! CallDebuggerNE() is added to the Assert Expression - it should return 0
     Omit('ReleaseOnly',_DEBUG_) 
-        Assert(0+CallDebuggerNE(),'Debugger, Window, Source, select Filename.clw, Breakpoint Line 109, then return here, click Continue button below.' )
+        Assert(0+CallDebuggerNE(),'Example4Omit_Debug_CompilerFlag:Debugger, Window, Source, select Filename.clw, Breakpoint Line 109, then return here, click Continue button below.' )
         Glo:SVCstring = 'You cant debug in Release Mode'
         Message(Glo:SVCstring &'<32,10>'& Glo:CSIDL_FolderPath,'Example4Omit_Debug_CompilerFlag')
     !ReleaseOnly     
 
 Example5Col1QuestionMark    Procedure()
     Code
-    ! CallDebuggerNE() is added to the Assert Expression - it should return 0
-?   Assert(0+CallDebuggerNE(),'Debugger, Window, Source, select Filename.clw, Breakpoint Line 117, then return here, click Continue button below.' )
+    ! All the lines of code starting with ? are only compiled when Build Configuration is set to Debug
+    ! CallDebugger() is added to the Assert Expression - it should return 0
+?   Assert(0+CallDebugger(),'Example5Col1QuestionMark:Debugger, Window, Source, select Filename.clw, Breakpoint Line 117, then return here, click Continue button below.' )
 ?   Glo:SVCstring = '? in column 1 for Build Configuration:Debug'
-?   Message(Glo:SVCstring &'<32,10>'& Glo:CSIDL_FolderPath,'Example5Col1QuestionMark')
+?   Message(Glo:SVCstring &'<32,10>'& Glo:CSIDL_FolderPath,'Example5Col1QuestionMark') 
 
+Example6StackTrace    Procedure()
+    Code
+    Assert(0,'Example6StackTrace:Assert1: Before the call to Example6StackTraceA(). Called by _main which is top entry in the Call Stack. Now click Continue button.' )
+    Example6StackTraceA()   ! Calls Example6StackTraceB(), and Example6StackTraceB() calls Example6StackTraceC() 
+    Assert(0,'Example6StackTrace:Assert2: After the call to Example6StackTraceA(). Called by _main which is now top entry in the Call Stack. Now click Continue button.' )
+            
+Example6StackTraceA   Procedure()
+    Code
+    Assert(0,'Example6StackTraceA. Called by Example6StackTrace which is top entry in the Call Stack. Now click Continue button.' )
+    Example6StackTraceB()
+
+Example6StackTraceB   Procedure()
+    Code
+    Assert(0,'Example6StackTraceB. Called by Example6StackTraceA which is top entry in the Call Stack. Now click Continue button.' )
+    Example6StackTraceC()
+
+Example6StackTraceC   Procedure()
+    Code
+    Assert(0,'Example6StackTraceC:Assert1. Called by Example6StackTraceB which is top entry in the Call Stack. Now click Continue button.' )
+    Assert(0,'Example6StackTraceC:Assert2. Called by Example6StackTraceB which is still top entry in the Call Stack. Now click Continue button.' )
 
 CallDebugger    PROCEDURE()
     Code
