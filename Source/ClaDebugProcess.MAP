@@ -1,0 +1,61 @@
+  401050      75C Code                CLADEBUGPROCESS_TEXT
+  4017AC       23 Code                IEXE32_TEXT
+  4017D0       1C Code                INIT_TEXT
+  402000      7C5 Initialized Data    CLADEBUGPROCESS_CONST
+  4027C8        4 Initialized Data    CLADEBUGPROCESS_DATA
+  4027CC       44 Initialized Data    IEXE32_DATA
+  402810        0 Initialized Data    __CPPINI_CONS
+  402810       1C Initialized Data    __CPPINI_CONST
+  40282C        4 Initialized Data    __CPPINI_END
+  402830        0 Initialized Data    __INIVMT_CONS
+  402830        0 Initialized Data    __INIVMT_CONST_END
+  402830      808 Un-initialized Data CLADEBUGPROCESS_BSS
+  404000        8 __T_L_S__DAT
+  404008        0 __T_L_S__DATA_END
+  404010        0 __T_L_S__BS
+  404010        0 __T_L_S__BSS_END
+
+  401050 _main
+  401108 CALLDEBUGGER@F
+  40116C EXAMPLE6STACKTRACEC@F
+  4011C4 EXAMPLE6STACKTRACEB@F
+  401204 EXAMPLE6STACKTRACEA@F
+  401244 EXAMPLE6STACKTRACE@F
+  4012A4 EXAMPLE5COL1QUESTIONMARK@F
+  401380 EXAMPLE4OMIT_DEBUG_COMPILERFLAG@F
+  401398 EXAMPLE3COMPILE_DEBUG_COMPILERFLAG@F
+  401480 EXAMPLE2IFCONDITIONASSERT@F
+  401564 EXAMPLE1CASEMESSAGE@F
+  4027C8 $GLO:SOMECONDITION
+  402830 $GLO:CURRENTPID
+  402834 $GLO:CSIDL_FOLDERPATH
+  402C34 $GLO:RVLONG
+  402C38 $GLO:SVCSTRING
+  405000 __import_section_start
+  4052B0 __import_section_end
+
+Imports
+ClaRUN.dll:Cla$AssertFailedM 40509C
+ClaRUN.dll:Cla$code 4050A0
+ClaRUN.dll:Cla$ERRORCODE 4050A4,401000
+ClaRUN.dll:Cla$init 4050A8
+ClaRUN.dll:Cla$MessageBox 4050AC,401008
+ClaRUN.dll:Cla$PushCString 4050B0
+ClaRUN.dll:Cla$PushLong 4050B4
+ClaRUN.dll:Cla$PushReal 4050B8
+ClaRUN.dll:Cla$PushString 4050BC
+ClaRUN.dll:Cla$RUN 4050C0,401010
+ClaRUN.dll:Cla$StackConcat 4050C4
+ClaRUN.dll:Cla$StackRotate 4050C8
+ClaRUN.dll:Cla$storecstr 4050CC
+ClaRUN.dll:_exit 4050D0,401018
+ClaRUN.dll:__a_chkstk 4050D4,401020
+ClaRUN.dll:__e_stack 4050D8,401028
+ClaRUN.dll:__sysinit 4050DC,401030
+ClaRUN.dll:__sysstart 4050E0,401038
+KERNEL32.dll:GetCurrentProcessId 4050F0,401040
+SHELL32.dll:SHGetFolderPathA 405100,401048
+
+
+
+Entry Point:   4017AC

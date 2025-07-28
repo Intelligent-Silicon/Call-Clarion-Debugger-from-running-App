@@ -55,6 +55,7 @@ CallDebuggerNE                      PROCEDURE(),Long,Proc
         End
     !DebugOnly
     Omit('ReleaseOnly',_DEBUG_)
+        !Comment this Halt() to test Example4Omit_Debug_CompilerFlag()
         Halt(0,'You cant debug with Build Configuration set to Release')
     !ReleaseOnly
 
@@ -87,7 +88,7 @@ Loc:MessageResult   Long
     IF Loc:MessageResult = 2 or Loc:MessageResult = 3
         MEssage('Wait for the Debugger to load,<32,10>' & |
                 'then click Window, Source, and select a "filename.clw",<32,10>' & |
-                'then set a Breakpoint on Line 79.<32,10>' & |
+                'then set a Breakpoint on Line 85.<32,10>' & |
                 'When that is done, come back to this message box and click the OK button below.','Example1')
         Glo:SVCstring = 'Case Message - CallDeubgger() or CallDebuggerNE()'
         Message(Glo:SVCstring &'<32,10>'& Glo:CSIDL_FolderPath,'Example1CaseMessage')
@@ -99,7 +100,7 @@ Example2IfConditionAssert    Procedure
     ! If Condition CallDebugger() and standard Assert()
     IF Glo:SomeCondition = True 
         CallDebugger()  
-        Assert(0,'Example2IfConditionAssert:Debugger, Window, Source, select Filename.clw, Breakpoint Line 90, then return here, click Continue button below.')
+        Assert(0,'Example2IfConditionAssert:Debugger, Window, Source, select Filename.clw, Breakpoint Line 96, then return here, click Continue button below.')
         Glo:SVCstring = 'If Condition, CallDebugger() and standard Assert()'
         Message(Glo:SVCstring &'<32,10>'& Glo:CSIDL_FolderPath,'Example2IfConditionAssert')
     End
@@ -108,7 +109,7 @@ Example3Compile_Debug_CompilerFlag    Procedure()
     Code
     ! CallDebugger() is appended to the Assert Message - it should return 0  
     Compile('DebugOnly',_DEBUG_) 
-        Assert(0,'Example3Compile_Debug_CompilerFlag:Debugger, Window, Source, select Filename.clw, Breakpoint Line 99, then return here, click Continue button below.' & CallDebugger())
+        Assert(0,'Example3Compile_Debug_CompilerFlag:Debugger, Window, Source, select Filename.clw, Breakpoint Line 105, then return here, click Continue button below.' & CallDebugger())
         Glo:SVCstring = 'CallDebugger() is appended to the Assert Message'
         Message(Glo:SVCstring &'|'& Glo:CSIDL_FolderPath,'Example3Compile_Debug_CompilerFlag')
     !DebugOnly
@@ -121,7 +122,7 @@ Example4Omit_Debug_CompilerFlag    Procedure()
     ! from the IDE.
     ! CallDebuggerNE() is added to the Assert Expression - it should return 0
     Omit('ReleaseOnly',_DEBUG_) 
-        Assert(0+CallDebuggerNE(),'Example4Omit_Debug_CompilerFlag:Debugger, Window, Source, select Filename.clw, Breakpoint Line 109, then return here, click Continue button below.' )
+        Assert(0+CallDebuggerNE(),'Example4Omit_Debug_CompilerFlag:Debugger, Window, Source, select Filename.clw, Breakpoint Line 118, then return here, click Continue button below.' )
         Glo:SVCstring = 'You cant debug in Release Mode'
         Message(Glo:SVCstring &'<32,10>'& Glo:CSIDL_FolderPath,'Example4Omit_Debug_CompilerFlag')
     !ReleaseOnly     
@@ -130,7 +131,7 @@ Example5Col1QuestionMark    Procedure()
     Code
     ! All the lines of code starting with ? are only compiled when Build Configuration is set to Debug
     ! CallDebugger() is added to the Assert Expression - it should return 0
-?   Assert(0+CallDebugger(),'Example5Col1QuestionMark:Debugger, Window, Source, select Filename.clw, Breakpoint Line 117, then return here, click Continue button below.' )
+?   Assert(0+CallDebugger(),'Example5Col1QuestionMark:Debugger, Window, Source, select Filename.clw, Breakpoint Line 127, then return here, click Continue button below.' )
 ?   Glo:SVCstring = '? in column 1 for Build Configuration:Debug'
 ?   Message(Glo:SVCstring &'<32,10>'& Glo:CSIDL_FolderPath,'Example5Col1QuestionMark') 
 
@@ -321,7 +322,7 @@ Loc:MessageResult   Long
     IF Loc:MessageResult = 2 or Loc:MessageResult = 3
         MEssage('Wait for the Debugger to load,<32,10>' & |
                 'then click Window, Source, and select a "filename.clw",<32,10>' & |
-                'then set a Breakpoint on Line 79.<32,10>' & |
+                'then set a Breakpoint on Line 85.<32,10>' & |
                 'When that is done, come back to this message box and click the OK button below.','Example1')
         Glo:SVCstring = 'Case Message - CallDeubgger() or CallDebuggerNE()'
         Message(Glo:SVCstring &'<32,10>'& Glo:CSIDL_FolderPath,'Example1CaseMessage')
@@ -343,7 +344,7 @@ Example2IfConditionAssert    Procedure
     ! If Condition CallDebugger() and standard Assert()
     IF Glo:SomeCondition = True 
         CallDebugger()  
-        Assert(0,'Debugger, Window, Source, select Filename.clw, Breakpoint Line 90, then return here, click Continue button below.')
+        Assert(0,'Example2IfConditionAssert:Debugger, Window, Source, select Filename.clw, Breakpoint Line 96, then return here, click Continue button below.')
         Glo:SVCstring = 'If Condition, CallDebugger() and standard Assert()'
         Message(Glo:SVCstring &'<32,10>'& Glo:CSIDL_FolderPath,'Example2IfConditionAssert')
     End
@@ -357,7 +358,7 @@ Example3Compile_Debug_CompilerFlag    Procedure()
     Code
     ! CallDebugger() is appended to the Assert Message - it should return 0  
     Compile('DebugOnly',_DEBUG_) 
-        Assert(0,'Debugger, Window, Source, select Filename.clw, Breakpoint Line 99, then return here, click Continue button below.' & CallDebugger())
+        Assert(0,'Example3Compile_Debug_CompilerFlag:Debugger, Window, Source, select Filename.clw, Breakpoint Line 105, then return here, click Continue button below.' & CallDebugger())
         Glo:SVCstring = 'CallDebugger() is appended to the Assert Message'
         Message(Glo:SVCstring &'|'& Glo:CSIDL_FolderPath,'Example3Compile_Debug_CompilerFlag')
     !DebugOnly
@@ -371,12 +372,15 @@ This example use the ```Omit``` directive to instuct the compiler to exclude the
 Example4Omit_Debug_CompilerFlag    Procedure()
     Code
     ! You cant debug a Release version in reality, but demonstrates how ClaDBne.exe could be called.
+    ! Whilst its good being able to step into the Debugger, if you use multiple Assert()'s, using the Non Elevated
+    ! removes the UAC prompt choice to not launch the debugger when not using the Debugger to start the program
+    ! from the IDE.
     ! CallDebuggerNE() is added to the Assert Expression - it should return 0
     Omit('ReleaseOnly',_DEBUG_) 
-        Assert(0+CallDebuggerNE(),'Debugger, Window, Source, select Filename.clw, Breakpoint Line 109, then return here, click Continue button below.' )
+        Assert(0+CallDebuggerNE(),'Example4Omit_Debug_CompilerFlag:Debugger, Window, Source, select Filename.clw, Breakpoint Line 118, then return here, click Continue button below.' )
         Glo:SVCstring = 'You cant debug in Release Mode'
         Message(Glo:SVCstring &'<32,10>'& Glo:CSIDL_FolderPath,'Example4Omit_Debug_CompilerFlag')
-    !ReleaseOnly  
+    !ReleaseOnly
 ```
 
 ### Example5Col1QuestionMark
@@ -386,10 +390,11 @@ This example uses the question mark ```?``` in Column 1 of the Text Editor to in
 ```clarion
 Example5Col1QuestionMark    Procedure()
     Code
-    ! CallDebuggerNE() is added to the Assert Expression - it should return 0
-?   Assert(0+CallDebuggerNE(),'Debugger, Window, Source, select Filename.clw, Breakpoint Line 117, then return here, click Continue button below.' )
+    ! All the lines of code starting with ? are only compiled when Build Configuration is set to Debug
+    ! CallDebugger() is added to the Assert Expression - it should return 0
+?   Assert(0+CallDebugger(),'Example5Col1QuestionMark:Debugger, Window, Source, select Filename.clw, Breakpoint Line 127, then return here, click Continue button below.' )
 ?   Glo:SVCstring = '? in column 1 for Build Configuration:Debug'
-?   Message(Glo:SVCstring &'<32,10>'& Glo:CSIDL_FolderPath,'Example5Col1QuestionMark')
+?   Message(Glo:SVCstring &'<32,10>'& Glo:CSIDL_FolderPath,'Example5Col1QuestionMark') 
 ```
 ![Screenshot](https://github.com/Intelligent-Silicon/Call-Clarion-Debugger-from-running-App/blob/main/Example5Col1QuestionMark.png)
 
@@ -402,18 +407,18 @@ If using the [Debug version of ClaRun.dll](README.md#clarion-debug-runtime), the
 Firstly all the text in the ```Assert()``` window can be selected and copied using a mouse. In this example, you can see the text that appears when the procedure ```Example6StackTraceC``` calls the second ```Assert()```. 
 
 ```
-Assertion failed  on line: 148 in file ClaDebugProcess.clw
+Assertion failed  on line: 149 in file ClaDebugProcess.clw
 Message: Example6StackTraceC:Assert2. Called by Example6StackTraceB which is still top entry in the Call Stack. Now click Continue button.
-Process PID=5180  Image: C:\ClaDebugProcess\ClaDebugProcess.Exe
-Thread 1  Handle=0000024C  TID=12972
+Process PID=6252  Image: C:\ClaDebugProcess\ClaDebugProcess.Exe
+Thread 1  Handle=0000024C  TID=13172
 
 Stack frame: 0019FE94
 
 Call Stack:
-004011FE  ClaDebugProcess.clw:143 - EXAMPLE6STACKTRACEB
-0040123E  ClaDebugProcess.clw:138 - EXAMPLE6STACKTRACEA
-0040127E  ClaDebugProcess.clw:133 - EXAMPLE6STACKTRACE
-00401103  ClaDebugProcess.clw:63 - _main
+004011FE  ClaDebugProcess.clw:144 - EXAMPLE6STACKTRACEB
+0040123E  ClaDebugProcess.clw:139 - EXAMPLE6STACKTRACEA
+0040127E  ClaDebugProcess.clw:134 - EXAMPLE6STACKTRACE
+00401103  ClaDebugProcess.clw:64 - _main
 010CF9E7  ClaRUN.dll:000CF9E7
 010CF4D1  ClaRUN.dll:000CF4D1
 76F1D1AB
@@ -422,17 +427,17 @@ Call Stack:
 At the time of writing the line number shown as ```:nnn``` after the ```filename.clw``` is out by 1, so subtract 1 from each number to get the correct line number. The line numbers should be what can be seen below. 
 ```
 Call Stack:
-004011FE  ClaDebugProcess.clw:142 - EXAMPLE6STACKTRACEB
-0040123E  ClaDebugProcess.clw:137 - EXAMPLE6STACKTRACEA
-0040127E  ClaDebugProcess.clw:132 - EXAMPLE6STACKTRACE
-00401103  ClaDebugProcess.clw:62 - _main
+004011FE  ClaDebugProcess.clw:143 - EXAMPLE6STACKTRACEB
+0040123E  ClaDebugProcess.clw:138 - EXAMPLE6STACKTRACEA
+0040127E  ClaDebugProcess.clw:133 - EXAMPLE6STACKTRACE
+00401103  ClaDebugProcess.clw:63 - _main
 ```
 
 The first column above shows a hex number which represents the memory address where the call originated from. The top line is the address in memory where the call to ```Example6StackTraceC``` originated from ```Example6StackTraceB```.
 
 The centre column above shows the ```filename.clw:nnn``` and the line number in the source code file.
 
-The third column above shows the procedure name that line 142 can be found in. 
+The third column above shows the procedure name that line 143 can be found in. 
 
 The second line above shows the memory address where the call to ```Example6StackTraceB``` is located in ```Example6StackTraceA```.
 
@@ -440,11 +445,11 @@ The third line above shows the memory address where the call to ```Example6Stack
 
 The fourth line above shows the memory address where the call to ```Example6StackTrace``` is located in ```_main``` 
 
-Now if your Hex is a little rusty, or you dont speak fluent Hex (yes some people can do this), a quick way to find out where line ```ClaDebugProcess.clw:142``` fits in the ```MAP``` file below is to convert it into Decimal, [search online for a Hex to Decimal convertor website](https://www.google.com/search?q=hex+to+decimal+converter). The decimal value is the 3rd column seen below.
+Now if your Hex is a little rusty, or you dont speak fluent Hex (yes some people can do this), a quick way to find out where line ```ClaDebugProcess.clw:143``` fits in the ```MAP``` file below is to convert it into Decimal, [search online for a Hex to Decimal convertor website](https://www.google.com/search?q=hex+to+decimal+converter). The decimal value is the 3rd column seen below.
 
 The ```MAP``` file is a summary of where different parts of an ```EXE```, ```DLL``` or ```Lib``` file can be found, these files follows rules based on the [Windows PE (Portable Executable) format](https://learn.microsoft.com/en-us/windows/win32/debug/pe-format).
 
-[C:\ClaDebugProcess\map\debug\ClaDebugProcess.map](https://github.com/Intelligent-Silicon/Call-Clarion-Debugger-from-running-App/blob/main/Source/ClaDebugProcess.map)
+[C:\ClaDebugProcess\map\debug\ClaDebugProcess.map](https://github.com/Intelligent-Silicon/Call-Clarion-Debugger-from-running-App/blob/main/Source/ClaDebugProcess.MAP)
 ```
   40116C EXAMPLE6STACKTRACEC@F - 4198764
   4011C4 EXAMPLE6STACKTRACEB@F - 4198852
@@ -455,13 +460,13 @@ The first line in the Call Stack, memory address ```004011FE``` translates to ``
 
 The general rule is take the first address shown in the ```Assert()``` window ```Call Stack``` and look in the corresponding ```MAP``` file for the procedure with an address thats lower but closest to the address shown in the ```Assert()``` message. 
 
-In this example ```4011C4 EXAMPLE6STACKTRACEB@F - 4198852``` has an address which is lower than ```004011FE``` aka ```4198910``` so it probably resides in the procedure ```Example6StackTraceB```, which we know because we can also see and compile the program source ```ClaDebugProcess.clw``` and it also happens to be on Line 142 of all things!
+In this example ```4011C4 EXAMPLE6STACKTRACEB@F - 4198852``` has an address which is lower than ```004011FE``` aka ```4198910``` so it probably resides in the procedure ```Example6StackTraceB```, which we know because we can also see and compile the program source ```ClaDebugProcess.clw``` and it also happens to be on Line 143 of all things!
 
 Repeat for the 2nd and subsequent lines in the ```Call Stack```.
 
 At this stage, and with a certain level of practice, you wont need to use the ```Debug``` version of the Clarion Runtime, which is why its not included first in the ```*.dll = %BIN%\Debug;%BIN%;%BIN%\AddIns\BackendBindings\ClarionBinding\Common;%ROOT%\Accessory\bin``` ```[Copy]``` section of the default ```Clarion110.RED``` Redirection file.
 
-The rest of ```MAP``` file is worth exploring to become familiar with it but thats beyond the scope of this Repo.
+The rest of the ```MAP``` file is worth exploring to become familiar with it but thats beyond the scope of this Repo.
 
 Anyway when trying to narrow down the source of the problem, we have to start at the top of the ```Call Stack``` and work backwards, so downwards. The number of lines in the ```Call Stack``` can be variable as it depends on how many times a different procedure has been called since the start, which in this case is ```_main```. 
 

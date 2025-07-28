@@ -47,6 +47,7 @@ CallDebuggerNE                      PROCEDURE(),Long,Proc
         End
     !DebugOnly
     Omit('ReleaseOnly',_DEBUG_)
+        !Comment this Halt() to test Example4Omit_Debug_CompilerFlag()
         Halt(0,'You cant debug with Build Configuration set to Release')
     !ReleaseOnly
 
@@ -79,7 +80,7 @@ Loc:MessageResult   Long
     IF Loc:MessageResult = 2 or Loc:MessageResult = 3
         MEssage('Wait for the Debugger to load,<32,10>' & |
                 'then click Window, Source, and select a "filename.clw",<32,10>' & |
-                'then set a Breakpoint on Line 79.<32,10>' & |
+                'then set a Breakpoint on Line 85.<32,10>' & |
                 'When that is done, come back to this message box and click the OK button below.','Example1')
         Glo:SVCstring = 'Case Message - CallDeubgger() or CallDebuggerNE()'
         Message(Glo:SVCstring &'<32,10>'& Glo:CSIDL_FolderPath,'Example1CaseMessage')
@@ -91,7 +92,7 @@ Example2IfConditionAssert    Procedure
     ! If Condition CallDebugger() and standard Assert()
     IF Glo:SomeCondition = True 
         CallDebugger()  
-        Assert(0,'Example2IfConditionAssert:Debugger, Window, Source, select Filename.clw, Breakpoint Line 90, then return here, click Continue button below.')
+        Assert(0,'Example2IfConditionAssert:Debugger, Window, Source, select Filename.clw, Breakpoint Line 96, then return here, click Continue button below.')
         Glo:SVCstring = 'If Condition, CallDebugger() and standard Assert()'
         Message(Glo:SVCstring &'<32,10>'& Glo:CSIDL_FolderPath,'Example2IfConditionAssert')
     End
@@ -100,7 +101,7 @@ Example3Compile_Debug_CompilerFlag    Procedure()
     Code
     ! CallDebugger() is appended to the Assert Message - it should return 0  
     Compile('DebugOnly',_DEBUG_) 
-        Assert(0,'Example3Compile_Debug_CompilerFlag:Debugger, Window, Source, select Filename.clw, Breakpoint Line 99, then return here, click Continue button below.' & CallDebugger())
+        Assert(0,'Example3Compile_Debug_CompilerFlag:Debugger, Window, Source, select Filename.clw, Breakpoint Line 105, then return here, click Continue button below.' & CallDebugger())
         Glo:SVCstring = 'CallDebugger() is appended to the Assert Message'
         Message(Glo:SVCstring &'|'& Glo:CSIDL_FolderPath,'Example3Compile_Debug_CompilerFlag')
     !DebugOnly
@@ -113,7 +114,7 @@ Example4Omit_Debug_CompilerFlag    Procedure()
     ! from the IDE.
     ! CallDebuggerNE() is added to the Assert Expression - it should return 0
     Omit('ReleaseOnly',_DEBUG_) 
-        Assert(0+CallDebuggerNE(),'Example4Omit_Debug_CompilerFlag:Debugger, Window, Source, select Filename.clw, Breakpoint Line 109, then return here, click Continue button below.' )
+        Assert(0+CallDebuggerNE(),'Example4Omit_Debug_CompilerFlag:Debugger, Window, Source, select Filename.clw, Breakpoint Line 118, then return here, click Continue button below.' )
         Glo:SVCstring = 'You cant debug in Release Mode'
         Message(Glo:SVCstring &'<32,10>'& Glo:CSIDL_FolderPath,'Example4Omit_Debug_CompilerFlag')
     !ReleaseOnly     
@@ -122,7 +123,7 @@ Example5Col1QuestionMark    Procedure()
     Code
     ! All the lines of code starting with ? are only compiled when Build Configuration is set to Debug
     ! CallDebugger() is added to the Assert Expression - it should return 0
-?   Assert(0+CallDebugger(),'Example5Col1QuestionMark:Debugger, Window, Source, select Filename.clw, Breakpoint Line 117, then return here, click Continue button below.' )
+?   Assert(0+CallDebugger(),'Example5Col1QuestionMark:Debugger, Window, Source, select Filename.clw, Breakpoint Line 127, then return here, click Continue button below.' )
 ?   Glo:SVCstring = '? in column 1 for Build Configuration:Debug'
 ?   Message(Glo:SVCstring &'<32,10>'& Glo:CSIDL_FolderPath,'Example5Col1QuestionMark') 
 
