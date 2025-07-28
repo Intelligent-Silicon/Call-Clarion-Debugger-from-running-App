@@ -231,9 +231,9 @@ Change the line ```*.dll```
 -- Directories only used when copying dlls
 *.dll = %BIN%\Debug;%BIN%;%BIN%\AddIns\BackendBindings\ClarionBinding\Common;%ROOT%\Accessory\bin
 ```
-by prepending ```%BIN%\Debug;``` to the paths, the IDE will copy the ```ClaRUN.dll``` from the ```%BIN%\Debug``` folder to the ```C:\ClaDebugProcess``` folder, because ```%BIN%\Debug;``` is first encountered before the ```%BIN%;``` folder the release version of the Clarion runtime exists.
+by prepending ```%BIN%\Debug;``` to the folder paths, the IDE will copy the ```ClaRUN.dll``` from the ```%BIN%\Debug``` folder to the ```C:\ClaDebugProcess``` folder, because ```%BIN%\Debug;``` is first encountered before the ```%BIN%;``` folder where the release version of the Clarion runtime exists.
 
-The only way to determine which version of ```ClaRUN.dll`` is in use is to check the file size.
+The only way to determine which version of ```ClaRUN.dll`` is in use is to check the file size in ```C:\ClaDebugProcess``` or use Assert() in your code.
 
 | ClaRUN.dll Type | File Size |
 | --- | --- |
