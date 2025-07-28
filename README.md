@@ -419,7 +419,7 @@ Call Stack:
 76F1D1AB
 76F1D131
 ```
-At the time of writing the line name shown as ```:nnn``` after the ```filename.clw``` is out by 1, subtract 1 from each number to get the correct line number. The line numbers should be what can be seen below. 
+At the time of writing the line number shown as ```:nnn``` after the ```filename.clw``` is out by 1, so subtract 1 from each number to get the correct line number. The line numbers should be what can be seen below. 
 ```
 Call Stack:
 004011FE  ClaDebugProcess.clw:142 - EXAMPLE6STACKTRACEB
@@ -428,9 +428,9 @@ Call Stack:
 00401103  ClaDebugProcess.clw:62 - _main
 ```
 
-The first column above shows the hex number which represents the memory address where the call occurred. The top line is the address in memory where the call to ```Example6StackTraceC``` occurred.
+The first column above shows a hex number which represents the memory address where the call originated from. The top line is the address in memory where the call to ```Example6StackTraceC``` originated from ```Example6StackTraceB```.
 
-The centre column above shows the ```filename.clw``` and the line number in the source code file.
+The centre column above shows the ```filename.clw:nnn``` and the line number in the source code file.
 
 The third column above shows the procedure name that line 142 can be found in. 
 
@@ -442,6 +442,8 @@ The fourth line above shows the memory address where the call to ```Example6Stac
 
 Now if your Hex is a little rusty, or you dont speak fluent Hex (yes some people can do this), a quick way to find out where line ```ClaDebugProcess.clw:142``` fits in the ```MAP``` file below is to convert it into Decimal, [search online for a Hex to Decimal convertor website](https://www.google.com/search?q=hex+to+decimal+converter). The decimal value is the 3rd column seen below.
 
+The ```MAP``` file is a summary of where different parts of an ```EXE```, ```DLL``` or ```Lib``` file can be found, these files follows rules based on the [Windows PE (Portable Executable) format](https://learn.microsoft.com/en-us/windows/win32/debug/pe-format).
+
 [C:\ClaDebugProcess\map\debug\ClaDebugProcess.map](https://github.com/Intelligent-Silicon/Call-Clarion-Debugger-from-running-App/blob/main/Source/ClaDebugProcess.map)
 ```
   40116C EXAMPLE6STACKTRACEC@F - 4198764
@@ -451,138 +453,15 @@ Now if your Hex is a little rusty, or you dont speak fluent Hex (yes some people
 
 The first line in the Call Stack, memory address ```004011FE``` translate to ```4198910``` in decimal, so we can see the actual procedure call to ```Example6StackTraceC``` is located between ```Example6StackTraceB``` and ```Example6StackTraceA``` in the ```MAP``` file. 
 
-Take the address shown in the ```Assert()``` window and look in the ```MAP``` file for the procedure with an address thats lower but closest to the address shown in the ```Assert()``` message.
+The general rule is take the first address shown in the ```Assert()``` window ```Call Stack``` and look in the corresponding ```MAP``` file for the procedure with an address thats lower but closest to the address shown in the ```Assert()``` message. 
 
-```C:\ClaDebugProcess\map\debug\ClaDebugProcess.map```
-```
-  401050      75C Code                CLADEBUGPROCESS_TEXT
-  4017AC       23 Code                IEXE32_TEXT
-  4017D0       1C Code                INIT_TEXT
-  402000      7C1 Initialized Data    CLADEBUGPROCESS_CONST
-  4027C4        4 Initialized Data    CLADEBUGPROCESS_DATA
-  4027C8       44 Initialized Data    IEXE32_DATA
-  40280C        0 Initialized Data    __CPPINI_CONS
-  40280C       1C Initialized Data    __CPPINI_CONST
-  402828        4 Initialized Data    __CPPINI_END
-  40282C        0 Initialized Data    __INIVMT_CONS
-  40282C        0 Initialized Data    __INIVMT_CONST_END
-  402830      808 Un-initialized Data CLADEBUGPROCESS_BSS
-  404000        8 __T_L_S__DAT
-  404008        0 __T_L_S__DATA_END
-  404010        0 __T_L_S__BS
-  404010        0 __T_L_S__BSS_END
+In this example ```4011C4 EXAMPLE6STACKTRACEB@F - 4198852``` has an address which is lower than ```004011FE``` aka ```4198910``` so it probably resides in the procedure ```Example6StackTraceB```, which we know because we can also see and compile the program source ```ClaDebugProcess.clw``` and it also happens to be on Line 142 of all things!
 
-  401050 _main
-  401108 CALLDEBUGGER@F
-  40116C EXAMPLE6STACKTRACEC@F
-  4011C4 EXAMPLE6STACKTRACEB@F
-  401204 EXAMPLE6STACKTRACEA@F
-  401244 EXAMPLE6STACKTRACE@F
-  4012A4 EXAMPLE5COL1QUESTIONMARK@F
-  401380 EXAMPLE4OMIT_DEBUG_COMPILERFLAG@F
-  401398 EXAMPLE3COMPILE_DEBUG_COMPILERFLAG@F
-  401480 EXAMPLE2IFCONDITIONASSERT@F
-  401564 EXAMPLE1CASEMESSAGE@F
-  4027C4 $GLO:SOMECONDITION
-  402830 $GLO:CURRENTPID
-  402834 $GLO:CSIDL_FOLDERPATH
-  402C34 $GLO:RVLONG
-  402C38 $GLO:SVCSTRING
-  405000 __import_section_start
-  4052B0 __import_section_end
+The rest of ```MAP``` is worth exploring but beyond the scope of this Repo.
 
-Imports
-ClaRUN.dll:Cla$AssertFailedM 40509C
-ClaRUN.dll:Cla$code 4050A0
-ClaRUN.dll:Cla$ERRORCODE 4050A4,401000
-ClaRUN.dll:Cla$init 4050A8
-ClaRUN.dll:Cla$MessageBox 4050AC,401008
-ClaRUN.dll:Cla$PushCString 4050B0
-ClaRUN.dll:Cla$PushLong 4050B4
-ClaRUN.dll:Cla$PushReal 4050B8
-ClaRUN.dll:Cla$PushString 4050BC
-ClaRUN.dll:Cla$RUN 4050C0,401010
-ClaRUN.dll:Cla$StackConcat 4050C4
-ClaRUN.dll:Cla$StackRotate 4050C8
-ClaRUN.dll:Cla$storecstr 4050CC
-ClaRUN.dll:_exit 4050D0,401018
-ClaRUN.dll:__a_chkstk 4050D4,401020
-ClaRUN.dll:__e_stack 4050D8,401028
-ClaRUN.dll:__sysinit 4050DC,401030
-ClaRUN.dll:__sysstart 4050E0,401038
-KERNEL32.dll:GetCurrentProcessId 4050F0,401040
-SHELL32.dll:SHGetFolderPathA 405100,401048
+Anyway when trying to narrow down the source of the problem, we have to start at the top of the ```Call Stack``` and work backwards, so downwards. The number of lines in the ```Call Stack``` can be variable as it depends on how many times a different procedure has been called since the start, which in this case is ```_main```. 
 
-
-
-Entry Point:   4017AC
-```
-
-
-```
-ClaDebugProcess.clw:58 - _main
-ClaRUN.dll:000CF9E7
-ClaRUN.dll:000CF4D1
-```
-
-
-
-This example is using the debug version of the Clarion runtime as described in Clarion Debug Runtime, it provides a little extra information which at a quick glance can give you a clue where the fault has arisen.
-
-To elucidate this information, a bit of sleuthing is required, namely looking in the ```C:\ClaDebugProcess\map\debug\``` folder for the file ```ClaDebugProcess.MAP```.
-
-The ```ClaDebugProcess.MAP``` contains a symbol-to-address mapping of all procedures, variables, and labels in ClaDebugProcess.exe .
-It’s essential for debugging because it helps translate raw memory addresses into meaningful names.
-When the ```Assert()``` window shows a memory address (e.g. 010CF4D1), you can closest matching address—either exactly 0041F2A3 or the nearest lower address. It will look something like:
-
-
-
-In Hex
-```
-Stack frame: 0019FEB8
-
-Call Stack:
-004010FE  ClaDebugProcess.clw:58 - _main
-010CF9E7  ClaRUN.dll:000CF9E7
-010CF4D1  ClaRUN.dll:000CF4D1
-76F1D1AB
-76F1D131
-```
-
-In Decimal
-```
-Stack frame: 1703608
-
-Call Stack:
-4198654  ClaDebugProcess.clw:58 - _main
-17627623  ClaRUN.dll:850407
-17626321  ClaRUN.dll:849105
-1995559339
-1995559217
-```
-After setting a Breakpoint on Line 117, and then clicking ```Continue``` in the ```Assert()``` window we can use the debugger to look at these addresses in memory.
-
-The Stack Frame. 
-
-This is the address where the Clarion Stack can be found in the bottom right ```Stack Trace()``` window pane.
-Expanding ```ExamplesCol1QuestionMark  EBP=0019FEB8H``` will expose the Thread and then the Registers.
-
-The Call Stack.
-```004010FE  ClaDebugProcess.clw:58 - _main``` shows the memory address in hex, where ```_main``` starts.
-```010CF9E7  ClaRUN.dll:000CF9E7``` shows where a Clarion runtime procedure starts.
-```010CF4D1  ClaRUN.dll:000CF4D1``` shows where another Clarion runtime procedure starts.
-Note these are referred to as ```CF9E7``` and ```CF4D1``` and if we were to locate the memory address ```01000000``` this would be the ```Image_Base``` 
-
-
-
-
-
-
-
- 
-
-
-Click Window, Examine Memory and the ```Memory()``` window will appear. 
+Fortunately its possible to work out what line of code within a procedure has made a procedure call, which can then help you to choose what lines to ```Breakpoint``` when you start a debugging session either starting from the IDE or by breaking into it with a carefully placed ```Assert()```.
 
 
 ### CallDebugger
