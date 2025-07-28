@@ -451,7 +451,7 @@ The ```MAP``` file is a summary of where different parts of an ```EXE```, ```DLL
   401204 EXAMPLE6STACKTRACEA@F = 4198916
 ```
 
-The first line in the Call Stack, memory address ```004011FE``` translate to ```4198910``` in decimal, so we can see the actual procedure call to ```Example6StackTraceC``` is located between ```Example6StackTraceB``` and ```Example6StackTraceA``` in the ```MAP``` file. 
+The first line in the Call Stack, memory address ```004011FE``` translates to ```4198910``` in decimal, so we can see the actual procedure call to ```Example6StackTraceC``` is located between ```Example6StackTraceB``` and ```Example6StackTraceA``` in the ```MAP``` file. 
 
 The general rule is take the first address shown in the ```Assert()``` window ```Call Stack``` and look in the corresponding ```MAP``` file for the procedure with an address thats lower but closest to the address shown in the ```Assert()``` message. 
 
