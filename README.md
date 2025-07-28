@@ -256,7 +256,7 @@ In the image below, a Breakpoint has been set on Line 79 denoted by the Yellow l
 ![Screenshot](https://github.com/Intelligent-Silicon/Call-Clarion-Debugger-from-running-App/blob/main/Example1Debug.png)
 
 ### Example2IfConditionAssert
-This example shows the CallDebugger() being called first, and whilst the Clarion Debugger is loading, the Assert() function will halt the program, displaying a message on how to proceed.
+This example shows the ```CallDebugger()``` being called first, and whilst the Clarion Debugger is loading, the Assert() function will halt the program, displaying a message on how to proceed.
 
 ```clarion
 Example2IfConditionAssert    Procedure
@@ -272,7 +272,7 @@ Example2IfConditionAssert    Procedure
 ```
 
 ### Example3Compile_Debug_CompilerFlag
-This example uses the ```Compile``` directive to instruct the compiler to include the code wrapped between ```Compile('DebugOnly',_DEBUG_)``` and ```DebugOnly``` when the Build Configuration is set to ```Debug```. The ```!``` preceeding the ```DebugOnly``` is for visual reasons only to turn the line into a comment in the Text Editor and it could be removed. The Compiler will remove the line ```DebugOnly``` at compile time, leaving the ```!``` in place to do nothing. The ```CallDebugger()``` is appended to the message in the ```Assert()``` statement, so in practice it should add ```0``` to the end of the message after the ```CallDebugger()``` procedure has been called.
+This example uses the ```Compile``` directive to instruct the compiler to include the code wrapped between ```Compile('DebugOnly',_DEBUG_)``` and ```DebugOnly``` when the Build Configuration is set to ```Debug```. The ```!``` preceeding the ```DebugOnly``` is for visual reasons only to turn the line into a comment in the Text Editor and it could be removed. The Compiler will remove the terminator ```DebugOnly``` at compile time, leaving the ```!``` in place to do nothing. The ```CallDebugger()``` is appended to the message in the ```Assert()``` statement, so in practice it should add ```0``` to the end of the message after the ```CallDebugger()``` procedure has been called.
 
 ```clarion
 Example3Compile_Debug_CompilerFlag    Procedure()
@@ -286,7 +286,7 @@ Example3Compile_Debug_CompilerFlag    Procedure()
 ```
 
 ### Example4Omit_Debug_CompilerFlag
-This example use the ```Omit``` directive to instuct the compiler to exclude the code wrapped between ```Omit('ReleaseOnly',_DEBUG_)``` and ```ReleaseOnly``` when the Build Configuration is set to ```Debug```. This is the opposite of ```Example3Compile_Debug_CompilerFlag``` so when this program is compiled in ```Release``` mode, the code will be included by the Compiler enabling it to be called, even though you cant debug a program in ```Release``` mode. The ```!``` preceeding the ```ReleaseOnly``` is for visual reasons only to turn the line into a comment in the Text Editor and it could be removed. The compiler will remove the line ```ReleaseOnly``` at compile time, leaving the ```!``` in place to do nothing. The ```CallDebuggerNE()``` is added to the expression in the ```Assert()``` statement, so in practice it should add ```0``` to the zero in the expression after the ```CallDebuggerNE()``` procedure has been called. 
+This example use the ```Omit``` directive to instuct the compiler to exclude the code wrapped between ```Omit('ReleaseOnly',_DEBUG_)``` and ```ReleaseOnly``` when the Build Configuration is set to ```Debug```. This is the opposite of ```Example3Compile_Debug_CompilerFlag``` so when this program is compiled in ```Release``` mode, the code will be included by the Compiler enabling it to be called, even though you cant debug a program in ```Release``` mode. The ```!``` preceeding the ```ReleaseOnly``` is for visual reasons only to turn the line into a comment in the Text Editor and it could be removed. The compiler will remove the terminator ```ReleaseOnly``` at compile time, leaving the ```!``` in place to do nothing. The ```CallDebuggerNE()``` is added to the expression in the ```Assert()``` statement, so in practice it should add ```0``` to the zero in the expression after the ```CallDebuggerNE()``` procedure has been called. 
 
 ```clarion
 Example4Omit_Debug_CompilerFlag    Procedure()
