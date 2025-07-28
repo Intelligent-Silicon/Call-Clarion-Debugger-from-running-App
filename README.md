@@ -192,6 +192,35 @@ Copy to ```C:\ClaDebugProcess```
 
 [ClaDebugProcess.clw](https://github.com/Intelligent-Silicon/Call-Clarion-Debugger-from-running-App/blob/main/Source/ClaDebugProcess.clw)
 
+### Debugger Colours 
+
+The Debugger uses 3 colours to depict its current activity.
+| Colour | Activity |
+| --- | --- |
+| Red | BreakPoints set on line |
+| Yellow | BreakPoint with Highlight bar on the line |
+| Green | Highlight bar on a line without a Breakpoint |
+
+### Debugger Control Keys
+
+The ```Filename.clw L: X of X``` window pane and ```Disassembly()``` window pane have controls in the bottom right. 
+
+These are the keyboard letters that perform different functions.
+| Key | Activity |
+| --- | --- |
+| G | (G)o - Run the program until the next Breakpoint |
+| B | Toggle (B)reakpoint on and off |
+| S | (S)tep through each line of Assembler - ```Disassembly()``` window pane does not have to be visible |
+| O | Step (O)ver Assembler - Step over Assembler lines to the next Breakpoint - ```Disassembly()``` window pane does not have to be visible |
+| T | S(t)ep through the (Clarion) source line by line - ```Filename.clw L: X of X``` window pane does not have to be visible |
+| E | Step over the (Clarion) source to the next Breakpoint - ```Filename.clw L: X of X``` window pane does not have to be visible |
+| C | Goto the current (C)ursor position in the (Clarion) source |
+| L | (L)ocate line number |
+| - | Contract the highlighted tree structure in the Globals() window pane and Stack Trace() window pane |
+| + | Expand the highlighted tree structure in the Globals() window pane and Stack Trace() window pane |
+
+You can also use the mouse to navigate around the debugger, double clicking on (Clarion) code and Assembler will toggle a Breakpoint.
+Clicking on the Tree nodes will expand and contract tree structures like the "Library State" in the Globals() window pane.
 
 ### Example1CaseMessage
 This example shows how a ```Case Message``` statement can be used to capture a response and then respond accordingly.
@@ -220,27 +249,39 @@ Loc:MessageResult   Long
         Message(Glo:SVCstring &'<32,10>'& Glo:CSIDL_FolderPath,'Example1CaseMessage')
     End
 ```
-In the image below, a Breakpoint has been set on Line 79 denoted by the Yellow line bar, the Line Number can be seen in the window title for the filename.clw eg ```C:\ClaDebugProcess\CLADEBUGPROCESS.CLW () L: 79 of 129```. Once the Developer clicks OK on the message box, the Globals() and Stack Trace() window panes on the right will appear. 
+In the image below, a Breakpoint has been set on Line 79 denoted by the Yellow line bar (Breakpoint and Highlight bar), the Line Number can be seen in the window title for the filename.clw eg ```C:\ClaDebugProcess\CLADEBUGPROCESS.CLW () L: 79 of 129```. Once the Developer clicks OK on the message box, the Globals() and Stack Trace() window panes on the right will appear. 
 
-The Debugger uses 3 colours to depict its current activity.
-| Colour | Activity |
-| --- | --- |
-| Red | BreakPoints set on line |
-| Yellow | BreakPoint with Highlight bar on the line |
-| Green | Highlight bar on a line without a Breakpoint |
-
-The ```Filename.clw L: X of X``` window pane and ```Disassembly()``` window pane have controls in the bottom right. These are the keyboard letters that perform different functions.
-| Key | Activity |
-| --- | --- |
-| G | (G)o - Run the program until the next Breakpoint |
-| B | Toggle (B)reakpoint on and off |
-| S | (S)tep through each line of Assembler - ```Disassembly()``` window pane does not have to be visible |
-| O | Step (O)ver Assembler - Step over Assembler lines to the next Breakpoint - ```Disassembly()``` window pane does not have to be visible |
-| T | S(t)ep through the (Clarion) source line by line - ```Filename.clw L: X of X``` window pane does not have to be visible |
-| E | Step over the (Clarion) source to the next Breakpoint - ```Filename.clw L: X of X``` window pane does not have to be visible |
-| C | Goto the current (C)ursor position in the (Clarion) source |
-| L | (L)ocate line number |
 
 
 ![Screenshot](https://github.com/Intelligent-Silicon/Call-Clarion-Debugger-from-running-App/blob/main/Example1Debug.png)
+
+### Example2IfConditionAssert
+This example shows the CallDebugger() being called first, and whilst the Clarion Debugger is loading, the Assert() function will halt the program, displaying a message on how to proceed.
+
+```clarion
+Example2IfConditionAssert    Procedure
+
+    Code
+    ! If Condition CallDebugger() and standard Assert()
+    IF Glo:SomeCondition = True 
+        CallDebugger()  
+        Assert(0,'Debugger, Window, Source, select Filename.clw, Breakpoint Line 90, then return here, click Continue button below.')
+        Glo:SVCstring = 'If Condition, CallDebugger() and standard Assert()'
+        Message(Glo:SVCstring &'<32,10>'& Glo:CSIDL_FolderPath,'Example2IfConditionAssert')
+    End
+```
+
+### Example3Compile_Debug_CompilerFlag
+This example uses the ```Compile``` directive to instruction the compiler to include the code wrapped between ```Compile('DebugOnly',_DEBUG_)``` and ```DebugOnly```. The ```!``` preceeding the ```DebugOnly``` is for visual reasons only to turn the line into a comment in the Editor and it could be removed. The compiler will remove the line ```!DebugOnly``` at compile time.
+
+```clarion
+Example3Compile_Debug_CompilerFlag    Procedure()
+    Code
+    ! CallDebugger() is appended to the Assert Message - it should return 0  
+    Compile('DebugOnly',_DEBUG_) 
+        Assert(0,'Debugger, Window, Source, select Filename.clw, Breakpoint Line 99, then return here, click Continue button below.' & CallDebugger())
+        Glo:SVCstring = 'CallDebugger() is appended to the Assert Message'
+        Message(Glo:SVCstring &'|'& Glo:CSIDL_FolderPath,'Example3Compile_Debug_CompilerFlag')
+    !DebugOnly
+```
 
