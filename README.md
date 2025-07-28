@@ -222,6 +222,26 @@ These are the keyboard letters that perform different functions.
 You can also use the mouse to navigate around the debugger, double clicking on (Clarion) code and Assembler will toggle a Breakpoint.
 Clicking on the Tree nodes will expand and contract tree structures like the "Library State" in the Globals() window pane.
 
+
+### Clarion Debug Runtime
+To use the Clarion Debug Runtime which displays additional information to help track down problems in code, copy the ```Clarion110.RED``` Redirection file to the ```C:\ClaDebugProcess```.
+Change the line ```*.dll```
+```
+[Copy]
+-- Directories only used when copying dlls
+*.dll = %BIN%\Debug;%BIN%;%BIN%\AddIns\BackendBindings\ClarionBinding\Common;%ROOT%\Accessory\bin
+```
+by prepending ```%BIN%\Debug;``` to the paths, the IDE will copy the ```ClaRUN.dll``` from the ```%BIN%\Debug``` folder to the ```C:\ClaDebugProcess``` folder, because ```%BIN%\Debug;``` is first encountered before the ```%BIN%;``` folder the release version of the Clarion runtime exists.
+
+The only way to determine which version of ```ClaRUN.dll`` is in use is to check the file size.
+
+| ClaRUN.dll Type | File Size |
+| --- | --- |
+| Release | 1746 KB |
+| Debug | 1755 KB | 
+
+
+
 ### Example1CaseMessage
 This example shows how a ```Case Message``` statement can be used to capture a response and then respond accordingly.
 
@@ -314,6 +334,17 @@ Example5Col1QuestionMark    Procedure()
 ?   Glo:SVCstring = '? in column 1 for Build Configuration:Debug'
 ?   Message(Glo:SVCstring &'<32,10>'& Glo:CSIDL_FolderPath,'Example5Col1QuestionMark')
 ```
+
+Note in this image there is additional information being displayed.
+```
+ClaDebugProcess.clw:58 - _main
+ClaRUN.dll:000CF9E7
+ClaRUN.dll:000CF4D1
+```
+
+![Screenshot](https://github.com/Intelligent-Silicon/Call-Clarion-Debugger-from-running-App/blob/main/Example5Col1QuestionMark.png)
+
+This example is using the debug version of the Clarion runtime. 
 
 ### CallDebugger
 This procedure calls the Clarion Debugger running it Elevated. Any ```ErrorCode()``` by the ```Run``` statement will be returned, otherwise ```ErrorCode()``` just returns 0.
