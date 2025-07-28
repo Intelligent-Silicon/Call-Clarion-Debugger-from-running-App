@@ -284,6 +284,7 @@ Example3Compile_Debug_CompilerFlag    Procedure()
         Message(Glo:SVCstring &'|'& Glo:CSIDL_FolderPath,'Example3Compile_Debug_CompilerFlag')
     !DebugOnly
 ```
+![Screenshot](https://github.com/Intelligent-Silicon/Call-Clarion-Debugger-from-running-App/blob/main/Example3Compile_Debug_CompilerFlag.png)
 
 ### Example4Omit_Debug_CompilerFlag
 This example use the ```Omit``` directive to instuct the compiler to exclude the code wrapped between ```Omit('ReleaseOnly',_DEBUG_)``` and ```ReleaseOnly``` when the Build Configuration is set to ```Debug```. This is the opposite of ```Example3Compile_Debug_CompilerFlag``` so when this program is compiled in ```Release``` mode, the code will be included by the Compiler enabling it to be called, even though you cant debug a program in ```Release``` mode. The ```!``` preceeding the ```ReleaseOnly``` is for visual reasons only to turn the line into a comment in the Text Editor and it could be removed. The compiler will remove the terminator ```ReleaseOnly``` at compile time, leaving the ```!``` in place to do nothing. The ```CallDebuggerNE()``` is added to the expression in the ```Assert()``` statement, so in practice it should add ```0``` to the zero in the expression after the ```CallDebuggerNE()``` procedure has been called. 
