@@ -194,7 +194,7 @@ Copy to ```C:\ClaDebugProcess```
 
 
 ### Example1CaseMessage
-This Example shows how a ```Case Message``` statement can be used to capture a response and then respond accordingly.
+This example shows how a ```Case Message``` statement can be used to capture a response and then respond accordingly.
 
 ```clarion
 Example1CaseMessage    Procedure
