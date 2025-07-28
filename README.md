@@ -209,7 +209,7 @@ These are the keyboard letters that perform different functions.
 | Key | Activity |
 | --- | --- |
 | G | (G)o - Run the program until the next Breakpoint |
-| B | Toggle (B)reakpoint on and off |
+| B | Toggle (B)reakpoint on and off on the currently highlighted line |
 | S | (S)tep through each line of Assembler - ```Disassembly()``` window pane does not have to be visible |
 | O | Step (O)ver Assembler - Step over Assembler lines to the next Breakpoint - ```Disassembly()``` window pane does not have to be visible |
 | T | S(t)ep through the (Clarion) source line by line - ```Filename.clw L: X of X``` window pane does not have to be visible |
