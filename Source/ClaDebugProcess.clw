@@ -38,14 +38,14 @@ CallDebuggerNE                      PROCEDURE(),Long,Proc
 
 
     CODE
-
-    ! If Build, Set Configuration is set to Release, this Halt will stop the program.
     Compile('DebugOnly',_DEBUG_)
         Case Message('Build Configuration:Debug<32,10>Do you want to continue?','Question',ICON:Question,Button:Yes+Button:No)
         OF Button:No
             Return
         End
     !DebugOnly
+
+    ! If Build, Set Configuration is set to Release, this Halt will stop the program.
     Omit('ReleaseOnly',_DEBUG_)
         !Comment this Halt() to test Example4Omit_Debug_CompilerFlag()
         Halt(0,'You cant debug with Build Configuration set to Release')
