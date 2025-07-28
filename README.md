@@ -470,7 +470,7 @@ The rest of the ```MAP``` file is worth exploring to become familiar with it but
 
 Anyway when trying to narrow down the source of the problem, we have to start at the top of the ```Call Stack``` and work backwards, so downwards. The number of lines in the ```Call Stack``` can be variable as it depends on how many times a different procedure has been called since the start, which in this case is ```_main```. 
 
-Fortunately its possible to work out what line of code within a procedure has made a procedure call, which can then help you to choose what lines to ```Breakpoint``` when you start a debugging session either starting from the IDE or by breaking into it with a carefully placed ```Assert()```.
+Fortunately its possible to work out what line of code within a procedure has made a procedure call, which can then help you to choose what lines to ```Breakpoint``` when you start a debugging session either starting from the IDE or by breaking into it with a carefully placed ```Assert()```, which this repo has now shown you.
 
 
 ### CallDebugger
