@@ -450,9 +450,9 @@ Now if your Hex is a little rusty, or you dont speak fluent Hex (yes some people
   401204 EXAMPLE6STACKTRACEA@F = 4198916
 ```
 
-The Call Stack address ```004011FE``` translate to ```4198910``` in decimal, so we can see the actual procedure call to ```Example6StackTraceC``` is located between ```Example6StackTraceB``` and ```Example6StackTraceA``` 
+The first line in the Call Stack, memory address ```004011FE``` translate to ```4198910``` in decimal, so we can see the actual procedure call to ```Example6StackTraceC``` is located between ```Example6StackTraceB``` and ```Example6StackTraceA``` in the ```MAP``` file. 
 
-The address seen in the Assert() works on the basis of closest matching (but not matching) address to ```004011FE``` aka ```4198910``` or the nearest lower in value address. In other words take the address shown in the Assert() message and look in the ```MAP``` file for the procedure with an address thats lower but closest to the address shown in the ```Assert()``` message.
+The address seen in the ```Assert()``` works on the basis of closest matching (but not matching) address to ```004011FE``` aka ```4198910``` or the nearest lower in value address. In other words take the address shown in the ```Assert()``` message and look in the ```MAP``` file for the procedure with an address thats lower but closest to the address shown in the ```Assert()``` message.
 
 ```C:\ClaDebugProcess\map\debug\ClaDebugProcess.map```
 ```
