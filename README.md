@@ -384,7 +384,7 @@ If using the [Debug version of ClaRun.dll](Call-Clarion-Debugger-from-running-Ap
 
 ![Screenshot](https://github.com/Intelligent-Silicon/Call-Clarion-Debugger-from-running-App/blob/main/Example6StackTraceC.png)
 
-Firstly all the text in the Assert() window can be selected and copied using a mouse. In this example, you can see the text that appears when the procedure ```Example6StackTraceC``` calls the second ```Assert()```. 
+Firstly all the text in the ```Assert()``` window can be selected and copied using a mouse. In this example, you can see the text that appears when the procedure ```Example6StackTraceC``` calls the second ```Assert()```. 
 
 ```
 Assertion failed  on line: 148 in file ClaDebugProcess.clw
@@ -413,7 +413,20 @@ Call Stack:
 00401103  ClaDebugProcess.clw:62 - _main
 ```
 
-The hex number in the first column on the left represents the memory address where the call occurred. These address work on the basis of closest matching address—either exactly ```004011FE``` aka ```4198910``` or the nearest lower address. In other words take the address shown in the Assert() message and look in the ```MAP``` file for the procedure with an address thats lower but closest to the address shown in the ```Assert()``` message.
+The hex number in the first column on the left represents the memory address where the call occurred. 
+
+Now if your Hex is a little rusty, or you dont speak fluent Hex, a quick way to find out where line ```ClaDebugProcess.clw:142``` fits in the ```MAP``` file below is to convert it into Decimal, where the decimal value is the 3rd column seen below.
+
+[C:\ClaDebugProcess\map\debug\ClaDebugProcess.map](https://github.com/Intelligent-Silicon/Call-Clarion-Debugger-from-running-App/blob/main/Source/ClaDebugProcess.map)
+```
+  40116C EXAMPLE6STACKTRACEC@F - 4198764
+  4011C4 EXAMPLE6STACKTRACEB@F - 4198852
+  401204 EXAMPLE6STACKTRACEA@F = 4198916
+```
+
+The Call Stack address ```004011FE``` translate to ```4198910``` in decimal, so we can see the actual procedure call to ```Example6StackTraceC``` is located between ```Example6StackTraceB``` and ```Example6StackTraceA``` 
+
+These address work on the basis of closest matching address—either exactly ```004011FE``` aka ```4198910``` or the nearest lower address. In other words take the address shown in the Assert() message and look in the ```MAP``` file for the procedure with an address thats lower but closest to the address shown in the ```Assert()``` message.
 
 To get a better understanding of this, look at the ```ClaDebugProcess.map``` found in ```C:\ClaDebugProcess\map\debug```. 
 
