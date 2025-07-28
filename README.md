@@ -430,7 +430,9 @@ Call Stack:
 ```
 
 The first column shows the hex number which represents the memory address where the call to ```Example6StackTraceC```occurred.
+
 The centre column shows the ```filename.clw``` and the line number in the source code file.
+
 The third column shows the procedure name that line 142 can be found in.  
 
 Now if your Hex is a little rusty, or you dont speak fluent Hex, a quick way to find out where line ```ClaDebugProcess.clw:142``` fits in the ```MAP``` file below is to convert it into Decimal, [search online for a Hex to Decimal convertor website](https://www.google.com/search?q=hex+to+decimal+converter), where the decimal value is the 3rd column seen below.
