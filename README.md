@@ -171,7 +171,7 @@ Once the debugger has loaded, click ```Window```, then click ```Source``` and se
 
 ![Screenshot](https://github.com/Intelligent-Silicon/Call-Clarion-Debugger-from-running-App/blob/main/SelectSourceCLW.png)
 
-Set a break point on the line of code, and this action of selecting a line prompts the debugger into loading the Procedures window pane. After setting any more Breakpoints, click OK on the message box and the Ddebugger will display the Globals() and Stack Trace() window panes on the right. The Assembler (Dissembly()) window is minimised on the bottom left of the debugger, and can be accessed Window menu option, if you fancy diving into a bit of Assembler.
+Set a break point on the line of code, and this action of selecting a line prompts the debugger into loading the Procedures window pane. After setting any more Breakpoints, click OK on the message box and the Debugger will display the Globals() and Stack Trace() window panes on the right. The Assembler (Dissembly()) window is minimised on the bottom left of the debugger, and can be accessed Window menu option, if you fancy diving into a bit of Assembler.
 
 ![Screenshot](https://github.com/Intelligent-Silicon/Call-Clarion-Debugger-from-running-App/blob/main/ClarionDebugger.png)
 
