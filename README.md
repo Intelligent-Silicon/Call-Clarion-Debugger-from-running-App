@@ -395,7 +395,7 @@ Example5Col1QuestionMark    Procedure()
 
 ### Example6StackTrace
 
-If using the [Debug version of ClaRun.dll](Call-Clarion-Debugger-from-running-App#clarion-debug-runtime), the ```Assert()``` window will display additional information in the ```Call Stack```.
+If using the [Debug version of ClaRun.dll](Call-Clarion-Debugger-from-running-App.md#clarion-debug-runtime), the ```Assert()``` window will display additional information in the ```Call Stack```.
 
 ![Screenshot](https://github.com/Intelligent-Silicon/Call-Clarion-Debugger-from-running-App/blob/main/Example6StackTraceC.png)
 
