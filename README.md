@@ -234,10 +234,10 @@ The ```Filename.clw L: X of X``` window pane and ```Disassembly()``` window pane
 | --- | --- |
 | G | (G)o - Run the program until the next Breakpoint |
 | B | Toggle (B)reakpoint on and off |
-| S | (S)tep through each line of Assembler - Disassembly() does not have to be visible |
-| O | Step (O)ver Assembler - Step over Assembler lines to the next Breakpoint - Disassembly() does not have to be visible |
-| T | S(t)ep through the (Clarion) source line by line - ```Filename.clw L: X of X``` does not have to be visible |
-| E | Step over the (Clarion) source to the next Breakpoint - ```Filename.clw L: X of X``` does not have to be visible |
+| S | (S)tep through each line of Assembler - ```Disassembly()``` window pane does not have to be visible |
+| O | Step (O)ver Assembler - Step over Assembler lines to the next Breakpoint - ```Disassembly()``` window pane does not have to be visible |
+| T | S(t)ep through the (Clarion) source line by line - ```Filename.clw L: X of X``` window pane does not have to be visible |
+| E | Step over the (Clarion) source to the next Breakpoint - ```Filename.clw L: X of X``` window pane does not have to be visible |
 | C | Goto the current (C)ursor position in the (Clarion) source |
 | L | (L)ocate line number |
 
