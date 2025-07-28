@@ -381,7 +381,7 @@ Example4Omit_Debug_CompilerFlag    Procedure()
 
 ### Example5Col1QuestionMark
 This example uses the question mark ```?``` in Column 1 of the Text Editor to include the line of code when the Build Configuration is set to
-```Debug```. When the Build Configuration is set to ```Release``` these lines of code will not be included by the Compiler.
+```Debug```. When the Build Configuration is set to ```Release``` these lines of code starting with a question mark will not be included by the Compiler.
 
 ```clarion
 Example5Col1QuestionMark    Procedure()
