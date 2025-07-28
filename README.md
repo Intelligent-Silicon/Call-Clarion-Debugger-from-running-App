@@ -171,7 +171,7 @@ Once the debugger has loaded, click ```Window```, then click ```Source``` and se
 
 ![Screenshot](https://github.com/Intelligent-Silicon/Call-Clarion-Debugger-from-running-App/blob/main/SelectSourceCLW.png)
 
-Set a break point on the required line(s) of code, and this action of selecting a line prompts the debugger into loading the Procedures window pane on the bottom left. After setting Breakpoints, click OK on the message box and the Debugger will display the Globals() and Stack Trace() window panes on the right. The Assembler (Disassembly()) window is minimised on the bottom left of the debugger, it can also be accessed from the Window menu option, if you fancy diving into a bit of Assembler. If you display the Disassembly() window pane beneath the Filename.clw window pane, and STEP (T) through the filename.clw code, the Highlight bar will jump to the corresponding line of Assembler code. If you STEP (T) through the Disassembly() Assembler code, the Highlight bar in the filename.clw will jump to the corresponding line of Clarion/C/Modula-2 code. If its not obvious one line of Clarion/C/Modula-2 code wraps several lines of Assembler().
+Set a break point on the required line(s) of code, and this action of selecting a line prompts the debugger into loading the Procedures window pane on the bottom left. After setting Breakpoints, click OK on the message box and the Debugger will display the Globals() and Stack Trace() window panes on the right. The Assembler (Disassembly()) window is minimised on the bottom left of the debugger, it can also be accessed from the Window menu option, if you fancy diving into a bit of Assembler. If you display the Disassembly() window pane beneath the Filename.clw window pane, and STEP (T) through the filename.clw code using the controls on the bottom right of the Filename.clw window pane, a second Highlight bar will jump to the corresponding line of Assembler code. If you STEP (T) through the Disassembly() Assembler code using the controls on the bottom right of the Disassembly() window pane, the Highlight bar in the filename.clw will jump to the corresponding line of Clarion/C/Modula-2 code. If its not obvious one line of Clarion/C/Modula-2 code wraps several lines of Assembler().
 
 ![Screenshot](https://github.com/Intelligent-Silicon/Call-Clarion-Debugger-from-running-App/blob/main/ClarionDebugger.png)
 
@@ -226,7 +226,7 @@ The Debugger uses 3 colours to depict its current activity.
 | Colour | Activity |
 | --- | --- |
 | Red | BreakPoints set on line |
-| Yellow | BreakPoint with Highlight on the line |
+| Yellow | BreakPoint with Highlight bar on the line |
 | Green | Highlight bar on a line without a Breakpoint |
 
 ![Screenshot](https://github.com/Intelligent-Silicon/Call-Clarion-Debugger-from-running-App/blob/main/Example1Debug.png)
