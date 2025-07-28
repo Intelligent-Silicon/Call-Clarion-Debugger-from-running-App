@@ -328,7 +328,7 @@ Loc:MessageResult   Long
         Message(Glo:SVCstring &'<32,10>'& Glo:CSIDL_FolderPath,'Example1CaseMessage')
     End
 ```
-In the image below, a Breakpoint has been set on Line 79 denoted by the Yellow line bar (Breakpoint and Highlight bar), the Line Number can be seen in the window title for the filename.clw eg ```C:\ClaDebugProcess\CLADEBUGPROCESS.CLW () L: 79 of 129```. Once the Developer clicks OK on the message box, the Globals() and Stack Trace() window panes on the right will appear. 
+In the image below, a Breakpoint has been set on Line 85 denoted by the Yellow line bar (Breakpoint and Highlight bar), the Line Number can be seen in the window title for the filename.clw eg ```C:\ClaDebugProcess\CLADEBUGPROCESS.CLW () L: 85 of 159```. Once the Developer clicks OK on the message box, the Globals() and Stack Trace() window panes on the right will appear. 
 
 
 
