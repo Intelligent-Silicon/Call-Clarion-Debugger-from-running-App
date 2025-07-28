@@ -229,5 +229,18 @@ The Debugger uses 3 colours to depict its current activity.
 | Yellow | BreakPoint with Highlight bar on the line |
 | Green | Highlight bar on a line without a Breakpoint |
 
+The ```Filename.clw L: X of X``` window pane and ```Disassembly()``` window pane have controls in the bottom right. These are the keyboard letters that perform different functions.
+| Key | Activity |
+| --- | --- |
+| G | (G)o - Run the program until the next Breakpoint |
+| B | Toggle (B)reakpoint on and off |
+| S | (S)tep through each line of Assembler - Disassembly() does not have to be visible |
+| O | Step (O)ver Assembler - Step over Assembler lines to the next Breakpoint - Disassembly() does not have to be visible |
+| T | S(t)ep through the (Clarion) source line by line - ```Filename.clw L: X of X``` does not have to be visible |
+| E | Step over the (Clarion) source to the next Breakpoint - ```Filename.clw L: X of X``` does not have to be visible |
+| C | Goto the current (C)ursor position in the (Clarion) source |
+| L | (L)ocate line number |
+
+
 ![Screenshot](https://github.com/Intelligent-Silicon/Call-Clarion-Debugger-from-running-App/blob/main/Example1Debug.png)
 
