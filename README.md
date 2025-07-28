@@ -459,7 +459,7 @@ In this example ```4011C4 EXAMPLE6STACKTRACEB@F - 4198852``` has an address whic
 
 Repeat for the 2nd and subsequent lines in the ```Call Stack```.
 
-At this stage, and with a certain level of practice, you wont need to use the Debug version of the Clarion Runtime, which is why its not included first in the ```*.dll = %BIN%\Debug;%BIN%;%BIN%\AddIns\BackendBindings\ClarionBinding\Common;%ROOT%\Accessory\bin``` ```[Copy]``` section of the ```Clarion110.RED``` Redirection file.
+At this stage, and with a certain level of practice, you wont need to use the Debug version of the Clarion Runtime, which is why its not included first in the ```*.dll = %BIN%\Debug;%BIN%;%BIN%\AddIns\BackendBindings\ClarionBinding\Common;%ROOT%\Accessory\bin``` ```[Copy]``` section of the default ```Clarion110.RED``` Redirection file.
 
 The rest of ```MAP``` file is worth exploring to become familiar with it but thats beyond the scope of this Repo.
 
