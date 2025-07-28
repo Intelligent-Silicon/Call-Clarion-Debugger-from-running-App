@@ -90,7 +90,7 @@ Example2IfConditionAssert    Procedure
         CallDebugger()  
         Assert(0,'Debugger, Window, Source, select Filename.clw, Breakpoint Line 92, then return here, click Continue button below.')
         Glo:SVCstring = 'If Condition, CallDebugger() and standard Assert()'
-        Message(Glo:SVCstring &'<32,10>'& Glo:CSIDL_FolderPath,'Example 2')
+        Message(Glo:SVCstring &'<32,10>'& Glo:CSIDL_FolderPath,'Example2IfConditionAssert')
     End
     
 
@@ -102,7 +102,7 @@ Example3Compile_Debug_CompilerFlag    Procedure()
     Compile('DebugOnly',_DEBUG_) 
         Assert(0,'Debugger, Window, Source, select Filename.clw, Breakpoint Line 104, then return here, click Continue button below.' & CallDebugger())
         Glo:SVCstring = 'CallDebugger() is appended to the Assert Message'
-        Message(Glo:SVCstring &'|'& Glo:CSIDL_FolderPath,'Example 3')
+        Message(Glo:SVCstring &'|'& Glo:CSIDL_FolderPath,'Example3Compile_Debug_CompilerFlag')
     !DebugOnly
                   
 Example4Omit_Debug_CompilerFlag    Procedure()
@@ -112,7 +112,7 @@ Example4Omit_Debug_CompilerFlag    Procedure()
     Omit('ReleaseOnly',_DEBUG_) 
         Assert(0+CallDebuggerNE(),'Debugger, Window, Source, select Filename.clw, Breakpoint Line 114, then return here, click Continue button below.' )
         Glo:SVCstring = 'You cant debug in Release Mode'
-        Message(Glo:SVCstring &'<32,10>'& Glo:CSIDL_FolderPath,'Example 4')
+        Message(Glo:SVCstring &'<32,10>'& Glo:CSIDL_FolderPath,'Example4Omit_Debug_CompilerFlag')
     !ReleaseOnly     
 
 Example5Col1QuestionMark    Procedure()
@@ -120,7 +120,7 @@ Example5Col1QuestionMark    Procedure()
     ! CallDebuggerNE() is added to the Assert Expression - it should return 0
 ?   Assert(0+CallDebuggerNE(),'Debugger, Window, Source, select Filename.clw, Breakpoint Line 122, then return here, click Continue button below.' )
 ?   Glo:SVCstring = '? in column 1 for Build Configuration:Debug'
-?   Message(Glo:SVCstring &'<32,10>'& Glo:CSIDL_FolderPath,'Example 5')
+?   Message(Glo:SVCstring &'<32,10>'& Glo:CSIDL_FolderPath,'Example5Col1QuestionMark')
 
 
 CallDebugger    PROCEDURE()
