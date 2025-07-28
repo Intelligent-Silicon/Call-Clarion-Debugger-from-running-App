@@ -171,16 +171,16 @@ Once the debugger has loaded, click ```Window```, then click ```Source``` and se
 
 ![Screenshot](https://github.com/Intelligent-Silicon/Call-Clarion-Debugger-from-running-App/blob/main/SelectSourceCLW.png)
 
-Set a break point on the line of code, and this action of selecting a line prompts the debugger into loading the remaining debugger window panes, to then enable you to carry out a debugging session, including stepping into Assembler if you fancy rolling your sleeves up a bit more.
+Set a break point on the line of code, and this action of selecting a line prompts the debugger into loading the Procedures window pane. After setting any more Breakpoints, click OK on the message box and the Ddebugger will display the Globals() and Stack Trace() window panes on the right. The Assembler (Dissembly()) window is minimised on the bottom left of the debugger, and can be accessed Window menu option, if you fancy diving into a bit of Assembler.
 
 ![Screenshot](https://github.com/Intelligent-Silicon/Call-Clarion-Debugger-from-running-App/blob/main/ClarionDebugger.png)
 
 
 
 
-If you want to get technical, check out the [D32.log](https://github.com/Intelligent-Silicon/Call-Clarion-Debugger-from-running-App/blob/main/D32.log) file, this is the Trace window, that documents the steps the Debugger peforms to load an app for debugging from the IDE or by breaking into a running app process by using this Win32 API [DebugActiveProcess](https://learn.microsoft.com/en-us/windows/win32/api/debugapi/nf-debugapi-debugactiveprocess). Obviously using this API also presents a security risk so use with caution.
+If you want to get technical, check out the [D32.log](https://github.com/Intelligent-Silicon/Call-Clarion-Debugger-from-running-App/blob/main/D32.log) file, this is a log of the Trace window of all the Debugger steps. This example documents the steps the Debugger peforms to load an app for debugging (from the IDE or) by breaking into a running app process by using this Win32 API [DebugActiveProcess](https://learn.microsoft.com/en-us/windows/win32/api/debugapi/nf-debugapi-debugactiveprocess). Obviously using this API also presents a security risk so use with caution if you dont want other people to take control of your programs.
 
-Source Files:
+### Source Files:
 
 Copy to ```C:\ClaDebugProcess```
 
