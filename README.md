@@ -153,9 +153,9 @@ The code calls the Window API ```GetCurrentProcessID``` to get the Process ID of
     ! <ProcessID> for the Clarion Debugger 
     Glo:CurrentPID  = ISWA_GetCurrentProcessID(0)
 ```
-Another way to get the ProcessID for the running app is to use [SysInternals procexp64.exe](https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer) but requires you to be able to identify the correct ProcessID when more than one instance of the program is running.
+Another way to get the ProcessID for the running app is to use [SysInternals procexp64.exe](https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer) but requires you to be able to identify the correct instance of the program and thus ProcessID when more than one instance of the program is running.
 
-If you want to Break into your running program manually, once you have obtained the ProcessID, paste the following into a Run window, a Dos window, or a Powershell window, and replace 1234 with the actual ProcessID.
+If you want to Break/Step into your running program manually, once you have obtained the ProcessID, paste the following into a Run window, a Dos window, or a Powershell window, and replace 1234 with the actual ProcessID.
 
 Debugger Elevated. Using the Debugger to start the App from the IDE will make the CSIDL represent the Administrator folder paths.
 ```
@@ -171,7 +171,7 @@ Once the debugger has loaded, click ```Window```, then click ```Source``` and se
 
 ![Screenshot](https://github.com/Intelligent-Silicon/Call-Clarion-Debugger-from-running-App/blob/main/SelectSourceCLW.png)
 
-Set a break point on the line of code, and this action of selecting a line prompts the debugger into loading the Procedures window pane. After setting any more Breakpoints, click OK on the message box and the Debugger will display the Globals() and Stack Trace() window panes on the right. The Assembler (Dissembly()) window is minimised on the bottom left of the debugger, and can be accessed Window menu option, if you fancy diving into a bit of Assembler.
+Set a break point on the required line(s) of code, and this action of selecting a line prompts the debugger into loading the Procedures window pane on the bottom left. After setting Breakpoints, click OK on the message box and the Debugger will display the Globals() and Stack Trace() window panes on the right. The Assembler (Disassembly()) window is minimised on the bottom left of the debugger, it can also be accessed from the Window menu option, if you fancy diving into a bit of Assembler. If you display the Disassembly() window pane beneath the Filename.clw window pane, and STEP (T) through the filename.clw code, the Highlight bar will jump to the corresponding line of Assembler code. If you STEP (T) through the Disassembly() Assembler code, the Highlight bar in the filename.clw will jump to the corresponding line of Clarion/C/Modula-2 code. If its not obvious one line of Clarion/C/Modula-2 code wraps several lines of Assembler().
 
 ![Screenshot](https://github.com/Intelligent-Silicon/Call-Clarion-Debugger-from-running-App/blob/main/ClarionDebugger.png)
 
