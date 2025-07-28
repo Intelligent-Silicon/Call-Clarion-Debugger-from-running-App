@@ -429,7 +429,7 @@ Call Stack:
 00401103  ClaDebugProcess.clw:62 - _main
 ```
 
-The first column above shows the hex number which represents the memory address where the call occurred. The top line is the address in code where the call to ```Example6StackTraceC``` occurred.
+The first column above shows the hex number which represents the memory address where the call occurred. The top line is the address in memory where the call to ```Example6StackTraceC``` occurred.
 
 The centre column above shows the ```filename.clw``` and the line number in the source code file.
 
