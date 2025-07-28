@@ -263,6 +263,7 @@ There are also two vertical scroll bars side by side in the Memory() window. One
 
 The ```Locate``` popup window only accepts hexadecimal values without any trailing ```h```.
 
+Right mouseclicking anywhere in the ```Memory()``` window pane will also popup a menu with the same options. 
 
 
 ### Clarion Debug Runtime
@@ -273,16 +274,31 @@ Change the line ```*.dll```
 -- Directories only used when copying dlls
 *.dll = %BIN%\Debug;%BIN%;%BIN%\AddIns\BackendBindings\ClarionBinding\Common;%ROOT%\Accessory\bin
 ```
-by prepending ```%BIN%\Debug;``` to the folder paths, the IDE will copy the ```ClaRUN.dll``` from the ```%BIN%\Debug``` folder to the ```C:\ClaDebugProcess``` folder, because ```%BIN%\Debug;``` is first encountered before the ```%BIN%;``` folder where the release version of the Clarion runtime exists.
+by prepending ```%BIN%\Debug``` to the folder paths, the IDE will copy the ```ClaRUN.dll``` from the ```%BIN%\Debug``` folder to the ```C:\ClaDebugProcess``` folder, because ```%BIN%\Debug``` is encountered before the ```%BIN%``` folder in the folder paths.
 
-The only way to determine which version of ```ClaRUN.dll``` is in use is to check the file size in ```C:\ClaDebugProcess``` or use ```Assert()``` in your code to see if the additional info is displayed.
+The fastest way to determine which version of ```ClaRUN.dll``` is in use is to check the file size in ```C:\ClaDebugProcess``` or use ```Assert()``` in your code to see if the additional info is displayed in the resulting ```Assert()``` window. 
 
 | ClaRUN.dll Type | File Size |
 | --- | --- |
 | Release | 1746 KB |
 | Debug | 1755 KB | 
 
-Right mouseclicking anywhere in the ```Memory()``` window pane will also popup a menu with the same options. 
+Alternatively you could run a Powershell command and hash the ClaRun.dll files.
+```
+PS C:\WINDOWS\system32> Get-FileHash -Path "C:\Clarion11\bin\debug\claRun.dll" -Algorithm MD5
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+MD5             6679BCEE992BF5B4876C6A88C819D883                                       C:\Clarion11\bin\debug\claRun.dll
+```
+```
+PS C:\WINDOWS\system32> Get-FileHash -Path "C:\Clarion11\bin\claRun.dll" -Algorithm MD5
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+MD5             7A780A0320838E781E873A948FE0658F                                       C:\Clarion11\bin\claRun.dll
+```
+
 
 ### Example1CaseMessage
 This example shows how a ```Case Message``` statement can be used to capture a response and then respond accordingly.
@@ -413,9 +429,11 @@ Call Stack:
 00401103  ClaDebugProcess.clw:62 - _main
 ```
 
-The hex number in the first column on the left represents the memory address where the call occurred. 
+The first column shows the hex number which represents the memory address where the call to ```Example6StackTraceC```occurred.
+The centre column shows the ```filename.clw``` and the line number in the source code file.
+The third column shows the procedure name that line 142 can be found in.  
 
-Now if your Hex is a little rusty, or you dont speak fluent Hex, a quick way to find out where line ```ClaDebugProcess.clw:142``` fits in the ```MAP``` file below is to convert it into Decimal, where the decimal value is the 3rd column seen below.
+Now if your Hex is a little rusty, or you dont speak fluent Hex, a quick way to find out where line ```ClaDebugProcess.clw:142``` fits in the ```MAP``` file below is to convert it into Decimal, [search online for a Hex to Decimal convertor website](https://www.google.com/search?q=hex+to+decimal+converter), where the decimal value is the 3rd column seen below.
 
 [C:\ClaDebugProcess\map\debug\ClaDebugProcess.map](https://github.com/Intelligent-Silicon/Call-Clarion-Debugger-from-running-App/blob/main/Source/ClaDebugProcess.map)
 ```
@@ -426,17 +444,7 @@ Now if your Hex is a little rusty, or you dont speak fluent Hex, a quick way to 
 
 The Call Stack address ```004011FE``` translate to ```4198910``` in decimal, so we can see the actual procedure call to ```Example6StackTraceC``` is located between ```Example6StackTraceB``` and ```Example6StackTraceA``` 
 
-These address work on the basis of closest matching address—either exactly ```004011FE``` aka ```4198910``` or the nearest lower address. In other words take the address shown in the Assert() message and look in the ```MAP``` file for the procedure with an address thats lower but closest to the address shown in the ```Assert()``` message.
-
-To get a better understanding of this, look at the ```ClaDebugProcess.map``` found in ```C:\ClaDebugProcess\map\debug```. 
-
-The first entry in the Call Stack is ```004011FE  ClaDebugProcess.clw:142 - EXAMPLE6STACKTRACEB```. Now if your Hex is a little rusty, or you dont speak fluent Hex, a quick way to find out where line 142 fits in the ```MAP``` file below is to convert it into Decimal as seen below. We can see the address for line 142 fits between ```4011C4 EXAMPLE6STACKTRACEB@F - 4198852``` and ```401204 EXAMPLE6STACKTRACEA@F = 4198916```.
-
-```
-  40116C EXAMPLE6STACKTRACEC@F - 4198764
-  4011C4 EXAMPLE6STACKTRACEB@F - 4198852
-  401204 EXAMPLE6STACKTRACEA@F = 4198916
-```
+The address seen in the Assert() works on the basis of closest matching (but not matching) address to ```004011FE``` aka ```4198910``` or the nearest lower in value address. In other words take the address shown in the Assert() message and look in the ```MAP``` file for the procedure with an address thats lower but closest to the address shown in the ```Assert()``` message.
 
 ```C:\ClaDebugProcess\map\debug\ClaDebugProcess.map```
 ```
