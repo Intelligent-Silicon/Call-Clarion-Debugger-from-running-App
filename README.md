@@ -441,7 +441,7 @@ The third line above shows the memory address where the call to ```Example6Stack
 
 The fourth line above shows the memory address where the call to ```Example6StackTrace``` is located in ```_main``` 
 
-Now if your Hex is a little rusty, or you dont speak fluent Hex (yes some people can do this), a quick way to find out where line ```ClaDebugProcess.clw:142``` fits in the ```MAP``` file below is to convert it into Decimal, [search online for a Hex to Decimal convertor website](https://www.google.com/search?q=hex+to+decimal+converter), where the decimal value is the 3rd column seen below.
+Now if your Hex is a little rusty, or you dont speak fluent Hex (yes some people can do this), a quick way to find out where line ```ClaDebugProcess.clw:142``` fits in the ```MAP``` file below is to convert it into Decimal, [search online for a Hex to Decimal convertor website](https://www.google.com/search?q=hex+to+decimal+converter). The decimal value is the 3rd column seen below.
 
 [C:\ClaDebugProcess\map\debug\ClaDebugProcess.map](https://github.com/Intelligent-Silicon/Call-Clarion-Debugger-from-running-App/blob/main/Source/ClaDebugProcess.map)
 ```
