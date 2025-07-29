@@ -307,7 +307,7 @@ The ```Memory()``` window pane controls in the bottom right.
 | N | Open a new Memory() window with the highlighted address now positioned on the top row |
 | L | Pops up a window where the memory address can be Located |
 
-There are also two vertical scroll bars side by side in the Memory() window. One mouse click on the inner scroll bar or click on the inner scrollbar arrows will jump to the next 10000 memory address and will span the entire memory range. The outer scroll bar will navigate approximately the current 10000 memory addresses and only span the current 10000 memory addresses.
+There are also two vertical scroll bars side by side in the ```Memory()``` window. One mouse click on the inner scroll bar or click on the inner scrollbar arrows will jump to the next 10000 memory address and will span the entire memory range. The outer scroll bar will navigate approximately the current 10000 memory addresses and only span the current 10000 memory addresses.
 
 The ```Locate``` popup window only accepts hexadecimal values without any trailing ```h```.
 
@@ -382,7 +382,7 @@ In the image below, a Breakpoint has been set on Line 85 denoted by the Yellow l
 ![Screenshot](https://github.com/Intelligent-Silicon/Call-Clarion-Debugger-from-running-App/blob/main/Example1Debug.png)
 
 ### Example2IfConditionAssert
-This example shows the ```CallDebugger()``` being called first, and whilst the Clarion Debugger is loading, the Assert() function will halt the program, displaying a message on how to proceed.
+This example shows the ```CallDebugger()``` being called first, and whilst the Clarion Debugger is loading, the ```Assert()``` function will halt the program, displaying a message on how to proceed.
 
 ```clarion
 Example2IfConditionAssert    Procedure
@@ -503,7 +503,7 @@ The ```MAP``` file is a summary of where different parts of an ```EXE```, ```DLL
   401204 EXAMPLE6STACKTRACEA@F = 4198916
 ```
 
-The first line in the Call Stack, memory address ```004011FE``` translates to ```4198910``` in decimal, so we can see the actual procedure call to ```Example6StackTraceC``` is located between ```Example6StackTraceB``` and ```Example6StackTraceA``` in the ```MAP``` file. 
+The first line in the ```Call Stack```, memory address ```004011FE``` translates to ```4198910``` in decimal, so we can see the actual procedure call to ```Example6StackTraceC``` is located between ```Example6StackTraceB``` and ```Example6StackTraceA``` in the ```MAP``` file. 
 
 The general rule is take the first address shown in the ```Assert()``` window ```Call Stack``` and look in the corresponding ```MAP``` file for the procedure with an address thats lower but closest to the address shown in the ```Assert()``` message. 
 
