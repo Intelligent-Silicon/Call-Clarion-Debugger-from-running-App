@@ -518,7 +518,7 @@ Anyway when trying to narrow down the source of the problem, we have to start at
 Fortunately its possible to work out what line of code within a procedure has made a procedure call, which can then help you to choose what lines to ```Breakpoint``` when you start a debugging session either starting from the IDE or by breaking into it with a carefully placed ```Assert()```, which this repo has now shown you.
 
 ### Example7AppGenAssert
-This procedure is a minimal version of a Clarion AppGen Procedure. Here the ```Ctrl``` & ```D key``` are ```Alert```, so at any time during the normal operation of a window procedure, you can trigger the ```Alert``` which then calls the ```Assert``` that starts the Debugger and lets you step into the Procedure.
+This procedure is a minimal version of a Clarion AppGen Procedure. Here the ```Ctrl``` & ```D key``` are ```Alert```, so at any time during the normal operation of a window procedure, you can trigger the ```Alert``` which then calls the ```Assert``` that starts the Debugger and lets you step into the Procedure and set ```Breakpoint```'s.
 
 ```clarion
 Example7AppGenAssert Procedure()
