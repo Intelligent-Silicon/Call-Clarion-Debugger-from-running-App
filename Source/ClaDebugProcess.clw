@@ -1,6 +1,6 @@
 
     PROGRAM 
-    INCLUDE('KEYCODES.CLW'),ONCE
+    
 Glo:CurrentPID              Ulong 
 ! https://github.com/Intelligent-Silicon/CSIDL
 ISEQ:CSIDL_DESKTOP          Equate(0)  ! C:\Users\Admin1\Desktop
@@ -151,6 +151,8 @@ Example6StackTraceC   Procedure()
 
 Example7AppGenAssert Procedure()
 
+    INCLUDE('KEYCODES.CLW'),ONCE
+
 Window WINDOW('AppGen Window Procedure'),AT(,,395,224),GRAY,FONT('Segoe UI',9,, |
             FONT:regular+FONT:underline)
         BUTTON('&OK'),AT(259,201,41,14),USE(?OkButton),FONT(,,,FONT:regular),DEFAULT
@@ -173,7 +175,7 @@ Window WINDOW('AppGen Window Procedure'),AT(,,395,224),GRAY,FONT('Segoe UI',9,, 
         CASE EVENT()
         OF EVENT:AlertKey       !Alert processing
             IF KeyCode() = CtrlD
-                Assert(0+CallDebugger(),'Example7AppGenAssert:Debugger, Window, Source, select Filename.clw, Breakpoint Line 177, then return here, click Continue button below.') 
+                Assert(0+CallDebugger(),'Example7AppGenAssert:Debugger, Window, Source, select Filename.clw, Breakpoint Line 179, then return here, click Continue button below.') 
                 Glo:SVCstring = 'AppGen Procedure using Alert Key'
                 Message(Glo:SVCstring &'|'& Glo:CSIDL_FolderPath,'Example7AppGenAssert')
             End
