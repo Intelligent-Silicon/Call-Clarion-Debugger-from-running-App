@@ -7,8 +7,8 @@ One way to step into a running app to debug it, is add the following to the Clar
 
 ```clarion
 
-    PROGRAM 
-
+PROGRAM 
+    INCLUDE('KEYCODES.CLW'),ONCE
 Glo:CurrentPID              Ulong 
 ! https://github.com/Intelligent-Silicon/CSIDL
 ISEQ:CSIDL_DESKTOP          Equate(0)  ! C:\Users\Admin1\Desktop
@@ -18,7 +18,6 @@ ISEQ:CSIDL_COMMON_APPDATA   Equate(35) ! C:\ProgramData or C:\Documents and Sett
 Glo:CSIDL_FolderPath        Cstring(1024)
 Glo:RVLong                  Long ! Return Value Long
 Glo:SVCstring               CString(1024)
-
 Glo:SomeCondition           Long(1)
 
     MAP
@@ -31,6 +30,7 @@ Example6StackTrace                  PROCEDURE()
 Example6StackTraceA                 PROCEDURE()
 Example6StackTraceB                 PROCEDURE()
 Example6StackTraceC                 PROCEDURE()
+Example7AppGenAssert                Procedure()
 CallDebugger                        PROCEDURE(),Long,Proc
 CallDebuggerNE                      PROCEDURE(),Long,Proc
 
@@ -44,7 +44,6 @@ CallDebuggerNE                      PROCEDURE(),Long,Proc
 !region File Declaration
 !endregion
 
-
     CODE
     Compile('DebugOnly',_DEBUG_)
         Case Message('Build Configuration:Debug<32,10>Do you want to continue?','Question',ICON:Question,Button:Yes+Button:No)
@@ -52,7 +51,7 @@ CallDebuggerNE                      PROCEDURE(),Long,Proc
             Return
         End
     !DebugOnly
-    
+
     ! If Build, Set Configuration is set to Release, this Halt will stop the program.
     Omit('ReleaseOnly',_DEBUG_)
         !Comment this Halt() to test Example4Omit_Debug_CompilerFlag()
@@ -69,6 +68,7 @@ CallDebuggerNE                      PROCEDURE(),Long,Proc
     Example4Omit_Debug_CompilerFlag()
     Example5Col1QuestionMark()
     Example6StackTrace()
+    Example7AppGenAssert()
     Return
   
 Example1CaseMessage    Procedure
@@ -155,6 +155,51 @@ Example6StackTraceC   Procedure()
     Code
     Assert(0,'Example6StackTraceC:Assert1. Called by Example6StackTraceB which is top entry in the Call Stack. Now click Continue button.' )
     Assert(0,'Example6StackTraceC:Assert2. Called by Example6StackTraceB which is still top entry in the Call Stack. Now click Continue button.' )
+ 
+
+Example7AppGenAssert Procedure()
+
+Window WINDOW('AppGen Window Procedure'),AT(,,395,224),GRAY,FONT('Segoe UI',9,, |
+            FONT:regular+FONT:underline)
+        BUTTON('&OK'),AT(259,201,41,14),USE(?OkButton),FONT(,,,FONT:regular),DEFAULT
+        BUTTON('&Cancel'),AT(303,201,42,14),USE(?CancelButton),FONT(,,,FONT:regular)
+        BUTTON('&Help'),AT(348,201,36,14),USE(?HelpButton),STD(STD:Help), |
+                FONT(,,,FONT:regular)
+        STRING('Press Ctrl + D to load the Debugger.'),AT(2,11,391,23),USE(?STRING1), |
+                CENTER,FONT(,16,,FONT:regular)
+        STRING('Debugger: Window, Source, select Filename.clw'),AT(2,41,391,23), |
+                USE(?STRING2),CENTER,FONT(,16,,FONT:regular)
+        STRING('Set Breakpoint, then click Assert window''s Continue button.'), |
+                AT(2,71,391,23),USE(?STRING3),CENTER,FONT(,16,,FONT:regular)
+    END 
+
+
+    Code
+    Open(Window)
+    ALERT(CtrlD)
+    Accept
+        CASE EVENT()
+        OF EVENT:AlertKey       !Alert processing
+            IF KeyCode() = CtrlD
+                Assert(0+CallDebugger(),'Example7AppGenAssert:Debugger, Window, Source, select Filename.clw, Breakpoint Line 177, then return here, click Continue button below.') 
+                Glo:SVCstring = 'AppGen Procedure using Alert Key'
+                Message(Glo:SVCstring &'|'& Glo:CSIDL_FolderPath,'Example7AppGenAssert')
+            End
+        End
+
+        CASE ACCEPTED()
+        OF ?OkButton
+            Close(Window)
+        OF ?CancelButton
+            Close(Window)
+        OF ?HelpButton
+            Close(Window)
+        End
+    End
+    
+
+
+
 
 CallDebugger    PROCEDURE()
     Code
@@ -472,6 +517,50 @@ Anyway when trying to narrow down the source of the problem, we have to start at
 
 Fortunately its possible to work out what line of code within a procedure has made a procedure call, which can then help you to choose what lines to ```Breakpoint``` when you start a debugging session either starting from the IDE or by breaking into it with a carefully placed ```Assert()```, which this repo has now shown you.
 
+### Example7AppGenAssert
+This procedure is a minimal version of a Clarion AppGen Procedure. Here the ```Ctrl``` & ```D key``` are ```Alert```, so at any time during the normal operation of a window procedure, you can trigger the ```Alert``` which then calls the ```Assert``` that starts the Debugger and lets you step into the step into the Procedure.
+
+```clarion
+Example7AppGenAssert Procedure()
+
+Window WINDOW('AppGen Window Procedure'),AT(,,395,224),GRAY,FONT('Segoe UI',9,, |
+            FONT:regular+FONT:underline)
+        BUTTON('&OK'),AT(259,201,41,14),USE(?OkButton),FONT(,,,FONT:regular),DEFAULT
+        BUTTON('&Cancel'),AT(303,201,42,14),USE(?CancelButton),FONT(,,,FONT:regular)
+        BUTTON('&Help'),AT(348,201,36,14),USE(?HelpButton),STD(STD:Help), |
+                FONT(,,,FONT:regular)
+        STRING('Press Ctrl + D to load the Debugger.'),AT(2,11,391,23),USE(?STRING1), |
+                CENTER,FONT(,16,,FONT:regular)
+        STRING('Debugger: Window, Source, select Filename.clw'),AT(2,41,391,23), |
+                USE(?STRING2),CENTER,FONT(,16,,FONT:regular)
+        STRING('Set Breakpoint, then click Assert window''s Continue button.'), |
+                AT(2,71,391,23),USE(?STRING3),CENTER,FONT(,16,,FONT:regular)
+    END 
+
+
+    Code
+    Open(Window)
+    ALERT(CtrlD)
+    Accept
+        CASE EVENT()
+        OF EVENT:AlertKey       !Alert processing
+            IF KeyCode() = CtrlD
+                Assert(0+CallDebugger(),'Example7AppGenAssert:Debugger, Window, Source, select Filename.clw, Breakpoint Line 177, then return here, click Continue button below.') 
+                Glo:SVCstring = 'AppGen Procedure using Alert Key'
+                Message(Glo:SVCstring &'|'& Glo:CSIDL_FolderPath,'Example7AppGenAssert')
+            End
+        End
+
+        CASE ACCEPTED()
+        OF ?OkButton
+            Close(Window)
+        OF ?CancelButton
+            Close(Window)
+        OF ?HelpButton
+            Close(Window)
+        End
+    End
+```
 
 ### CallDebugger
 This procedure calls the Clarion Debugger running it Elevated. Any ```ErrorCode()``` by the ```Run``` statement will be returned, otherwise ```ErrorCode()``` just returns 0.
